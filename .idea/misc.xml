@@ -6,6 +6,9 @@
       <list>
         <option value="$PROJECT_DIR$/UserService/pom.xml" />
         <option value="$PROJECT_DIR$/RatingService/RatingService/pom.xml" />
+        <option value="$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/pom.xml" />
+        <option value="$PROJECT_DIR$/springGateway/springGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" />
       </list>
     </option>
   </component>

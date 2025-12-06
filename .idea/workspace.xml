@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a1a4fab-d0b2-426b-b083-356f4b8c3de0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Toural.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/db/migration/V1__create_rating_schema.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/db/migration/V2__create_trigger_func.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/db/migration/V3__apply_trigger.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Toural/UserService/UserServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RatingService/RatingService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RatingService/RatingService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -56,7 +49,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Toural/RatingService/RatingService/src/main/resources/db/migration"
+    "last_opened_file_path": "D:/Toural/APIGateway/APIGateway"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -64,7 +57,26 @@
       <recent name="D:\Toural\RatingService\RatingService\src\main\resources\db\migration" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RatingServiceApplication">
+  <component name="RunManager">
+    <configuration name="API-Gateway" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.Toural.springGateway.SpringGatewayApplication" />
+      <module name="springGateway" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RatingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -90,7 +102,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServiceRegistry" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.Toural.ServiceRegistry.ServiceRegistry.ServiceRegistryApplication" />
+      <module name="ServiceRegistry" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.Toural.UserService.UserServiceApplication" />
       <module name="UserService" />
       <extension name="coverage">
@@ -99,11 +132,23 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ServiceRegistry" />
+      <item itemvalue="Application.API-Gateway" />
       <item itemvalue="Application.RatingServiceApplication" />
       <item itemvalue="Application.UserServiceApplication" />
     </list>
@@ -124,5 +169,24 @@
       <updated>1764927224231</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/springGateway/springGateway/src/main/java/com/Toural/springGateway/Config/GatewayConfig.java</url>
+          <line>11</line>
+          <properties class="com.Toural.springGateway.Config.GatewayConfig" method="httpClient">
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/springGateway/springGateway/src/main/java/com/Toural/springGateway/Config/GatewayConfig.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
