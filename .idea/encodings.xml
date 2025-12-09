@@ -4,6 +4,10 @@
     <file url="file://$PROJECT_DIR$/APIGateway/APIGateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/AuthServer/AuthServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/AuthServer/AuthServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HotelService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/HotelService/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RatingService/RatingService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/src/main/resources" charset="UTF-8" />
