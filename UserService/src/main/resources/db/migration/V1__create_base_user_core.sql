@@ -17,12 +17,10 @@ CREATE TABLE IF NOT EXISTS base_user_core (
     name          TEXT   NOT NULL,
     email         TEXT   NOT NULL,
     email_norm    TEXT   NOT NULL,
-    password      TEXT   NOT NULL,
     phone_no      TEXT   NOT NULL,
     user_type     TEXT   NOT NULL,
     created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
     is_active     BOOLEAN NOT NULL DEFAULT true,
-    token_ID       INT    NOT NULL,
     PRIMARY KEY (email_bucket, user_id)   -- << include partition key here
 )PARTITION BY LIST (email_bucket);
 

@@ -9,10 +9,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RatingService/RatingService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RatingService/RatingService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RatingService/RatingService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Models/BaseUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Models/BaseUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/db/migration/V1__create_base_user_core.sql" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/db/migration/V1__create_base_user_core.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,24 +45,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Toural/APIGateway/APIGateway"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Toural/AuthServer/AuthServer/src/main/java/com/Toural/AuthServer/Security&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Toural\AuthServer\AuthServer\src\main\java\com\Toural\AuthServer\Security" />
+      <recent name="D:\Toural\AuthServer\AuthServer\src\main\java\com\Toural\AuthServer\Config" />
+      <recent name="D:\Toural\AuthServer\AuthServer\src\main\resources\db\migration" />
       <recent name="D:\Toural\RatingService\RatingService\src\main\resources\db\migration" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.Toural.AuthServer.Repo" />
+      <recent name="com.Toural.AuthServer.Util" />
+      <recent name="com.Toural.AuthServer.Models" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="API-Gateway" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.Toural.springGateway.SpringGatewayApplication" />
-      <module name="springGateway" />
+      <option name="MAIN_CLASS_NAME" value="com.APIGateway.APIGateway.ApiGatewayApplication" />
       <extension name="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -147,8 +154,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ServiceRegistry" />
       <item itemvalue="Application.API-Gateway" />
+      <item itemvalue="Application.ServiceRegistry" />
       <item itemvalue="Application.RatingServiceApplication" />
       <item itemvalue="Application.UserServiceApplication" />
     </list>

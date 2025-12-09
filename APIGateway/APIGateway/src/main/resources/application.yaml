@@ -15,10 +15,10 @@ spring:
           predicates:
             - Path=/rating/**
 
-        - id: HOTELSERVICE
-          uri: lb://HOTELSERVICE
-          predicates:
-            - Path=/hotel/**
+#        - id: HOTELSERVICE
+#          uri: lb://HOTELSERVICE
+#          predicates:
+#            - Path=/hotel/**
 
 
 server:

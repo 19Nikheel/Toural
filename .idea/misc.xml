@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/ServiceRegistry/ServiceRegistry/pom.xml" />
         <option value="$PROJECT_DIR$/springGateway/springGateway/pom.xml" />
         <option value="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/AuthServer/AuthServer/pom.xml" />
       </list>
     </option>
   </component>

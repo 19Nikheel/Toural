@@ -35,9 +35,6 @@ public class BaseUser {
     String normEmail;
 
 
-    @Column(name="password",nullable = false)
-    String password;
-
     @Column(name = "email_bucket", nullable = false)
     private Integer emailBucket;
 
