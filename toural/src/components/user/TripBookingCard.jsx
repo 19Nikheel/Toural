@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import Pill from "../ui/Pill";
 import RatingStars from "../ui/RatingStars";
@@ -22,7 +23,7 @@ const statusConfig = {
 
 export const TripBookingCard = ({ trip }) => {
   const statusInfo = statusConfig[trip.status] ?? statusConfig.upcoming;
-
+  const navigate = useNavigate();
   return (
     <Card className="w-full max-w-2xl mx-auto md:max-w-none">
       <div className="flex flex-col gap-4 md:flex-row md:items-stretch">
@@ -89,6 +90,7 @@ export const TripBookingCard = ({ trip }) => {
           <div className="flex flex-col gap-1">
             <button
               type="button"
+              onClick={() => navigate(`/trip/${trip.id}`)}
               className="w-full rounded-full bg-slate-900 px-3 py-1.5 text-[0.75rem] font-medium text-slate-50 transition hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
             >
               View details

@@ -1,5 +1,6 @@
 // src/components/ui/Card.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Card({
   children,
@@ -10,7 +11,7 @@ export default function Card({
 }) {
   const baseClasses = `
     rounded-3xl
-    min-h-[15rem]             /* More height for richer card visuals */
+    min-h-fit             /* More height for richer card visuals */
     border border-slate-200/60
     bg-white/95
     dark:border-white/10
@@ -38,7 +39,6 @@ export default function Card({
     text-slate-700
     dark:text-slate-200
   `;
-
   return (
     <div
       className={`${baseClasses} ${textEnhance} ${padding} ${hoverClasses} ${className}`}

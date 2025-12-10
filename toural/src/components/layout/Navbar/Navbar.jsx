@@ -5,15 +5,17 @@ import NavbarLinks from "./NavbarLinks";
 import NavbarActions from "./NavbarActions";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "../../ui/ThemeToggle";
+import { useAuth } from "../../../context/AuthContext";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { userAuthenticated } = useAuth();
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200/60 bg-slate-50/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80 w-full">
       <div className="mx-auto flex max-w-8xl items-center justify-between px-8 py-3 md:px-6">
         <BrandLogo />
-        <NavbarLinks />
+        {true && <NavbarLinks />}
 
         <div className="flex items-center gap-2">
           <NavbarActions />

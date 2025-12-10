@@ -10,16 +10,28 @@ const DestinationCard = ({ destination }) => {
   const navigate = useNavigate();
 
   const primaryStay = destination.stayOptions?.[0];
-  const avgPrice =
-    destination.stayOptions && destination.stayOptions.length
-      ? Math.round(
-          destination.stayOptions.reduce((sum, s) => sum + s.pricePerNight, 0) /
-            destination.stayOptions.length
-        )
-      : null;
+
+  const avgPrice = destination.price || null;
+
+  const tagsArray = Array.isArray(destination.tags)
+    ? destination.tags
+    : typeof destination.tags === "string"
+    ? destination.tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean)
+    : [];
+
+  // Fallback for nights if not provided
+  const nights =
+    destination.suggestedNights ||
+    destination.nights || // in case backend adds this later
+    2; // default
+
+  const totalApprox = avgPrice && nights ? avgPrice * nights : null;
 
   const handleViewDetails = () => {
-    navigate(`/trip/${destination.id}`);
+    navigate(`/trip/${destination.id.timestamp}`);
   };
 
   return (
@@ -27,29 +39,30 @@ const DestinationCard = ({ destination }) => {
       <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
         {/* Left gradient thumbnail area */}
         <div
-          className={`relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${destination.heroColor} p-4 text-white md:max-w-[260px]`}
+          className={`relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-sky-500/80 via-emerald-500/80 to-slate-800/80 p-4 text-white md:max-w-[260px]`}
         >
           <div>
             <p className="text-[0.7rem] uppercase tracking-[0.18em] text-slate-100/80">
-              {destination.region} · {destination.country}
+              {destination.cityName} · India
             </p>
             <h3 className="mt-1 text-base font-semibold md:text-lg">
               {destination.name}
             </h3>
           </div>
+
           <div className="mt-3 flex items-center justify-between text-[0.8rem] text-slate-100">
-            <RatingStars
-              rating={destination.rating}
-              size="xs"
-              showValue={false}
-            />
+            <RatingStars rating="4.5" size="xs" showValue={false} />
+
             {avgPrice && (
               <span>
                 From ₹{avgPrice.toLocaleString("en-IN")}{" "}
-                <span className="text-[0.7rem]">/ night</span>
+                <span className="text-[0.7rem]">
+                  {/* change the label as per your meaning */}/ person
+                </span>
               </span>
             )}
           </div>
+
           <div className="pointer-events-none absolute -right-8 -top-8 h-16 w-16 rounded-full border border-white/35 bg-white/25 blur-xl" />
         </div>
 
@@ -57,7 +70,7 @@ const DestinationCard = ({ destination }) => {
         <div className="flex flex-[2] flex-col gap-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap gap-1.5 text-[0.7rem]">
-              {destination.tags?.slice(0, 4).map((tag) => (
+              {tagsArray.slice(0, 4).map((tag) => (
                 <Pill
                   key={tag}
                   variant="subtle"
@@ -67,16 +80,19 @@ const DestinationCard = ({ destination }) => {
                 </Pill>
               ))}
             </div>
-            <Pill variant="highlight" className="text-[0.7rem]">
-              {destination.suggestedNights} nights · from approx ₹
-              {((avgPrice || 0) * destination.suggestedNights).toLocaleString(
-                "en-IN"
-              )}
-            </Pill>
+
+            {totalApprox && (
+              <Pill variant="highlight" className="text-[0.7rem]">
+                {nights} nights · from approx ₹
+                {totalApprox.toLocaleString("en-IN")}
+              </Pill>
+            )}
           </div>
 
+          {/* Highlights already matches your API shape */}
           <HighlightsList items={destination.highlights} />
 
+          {/* This will simply not render for now since stayOptions is absent */}
           {primaryStay && <StayOptionItem stay={primaryStay} />}
 
           <div className="mt-1 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-slate-600 dark:text-slate-300">
@@ -84,6 +100,7 @@ const DestinationCard = ({ destination }) => {
               Best season:{" "}
               <span className="font-medium">{destination.bestSeason}</span>
             </span>
+
             <div className="flex gap-2">
               <button
                 type="button"
@@ -105,4 +122,5 @@ const DestinationCard = ({ destination }) => {
     </Card>
   );
 };
+
 export default DestinationCard;

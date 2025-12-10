@@ -6,15 +6,16 @@ import RangeSlider from "../ui/RangeSlider";
 import IconInput from "../ui/IconInput";
 import Button from "../ui/Button";
 import IconBadge from "../ui/IconBadge";
+import axiosInstance from "../../context/axiosInstance";
 
-const VIBES = [
-  { id: "any", label: "Any", icon: "✨" },
-  { id: "beach", label: "Beach", icon: "🏖️" },
-  { id: "mountain", label: "Mountains", icon: "⛰️" },
-  { id: "city", label: "City life", icon: "🌆" },
-  { id: "romantic", label: "Romantic", icon: "💖" },
-  { id: "adventure", label: "Adventure", icon: "🎒" },
-];
+// const VIBES = [
+//   { id: "any", label: "Any", icon: "✨" },
+//   { id: "beach", label: "Beach", icon: "🏖️" },
+//   { id: "mountain", label: "Mountains", icon: "⛰️" },
+//   { id: "city", label: "City life", icon: "🌆" },
+//   { id: "romantic", label: "Romantic", icon: "💖" },
+//   { id: "adventure", label: "Adventure", icon: "🎒" },
+// ];
 
 const TripPlannerCard = () => {
   const [budget, setBudget] = useState(50000);
@@ -22,20 +23,24 @@ const TripPlannerCard = () => {
   const [vibe, setVibe] = useState("any");
   const navigate = useNavigate();
 
-  const primaryVibes = VIBES.slice(0, 3);
-  const secondaryVibes = VIBES.slice(3);
+  // const primaryVibes = VIBES.slice(0, 3);
+  // const secondaryVibes = VIBES.slice(3);
 
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    params.set("place", place);
-    if (budget) params.set("budget", String(budget));
-    if (vibe) params.set("vibe", vibe);
-    navigate(`/results?${params.toString()}`);
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      let p = place.trim();
+      p = p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+      const response = await axiosInstance.get(`/city/city-name/${p}`);
+      console.log(response.data);
+      navigate(`/results?cityCode=${response.data.cityCode}`);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <Card className="mt-6 md:p-6">
-      {/* Header */}
       <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-[0.7rem] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">
@@ -50,9 +55,7 @@ const TripPlannerCard = () => {
         </span>
       </div>
 
-      {/* Main grid */}
       <div className="grid gap-4 md:grid-cols-3">
-        {/* Destination */}
         <div className="md:col-span-2">
           <FieldLabel htmlFor="place">Destination</FieldLabel>
           <IconInput
@@ -69,7 +72,6 @@ const TripPlannerCard = () => {
           </p>
         </div>
 
-        {/* Budget */}
         <div className="md:col-span-1">
           <FieldLabel
             htmlFor="budget"

@@ -9,7 +9,7 @@ export default function BrandLogo() {
       </div>
       <div>
         <p className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
-          TripCraft
+          Toural
         </p>
         <p className="text-[0.7rem] uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
           Smart Tour Planner

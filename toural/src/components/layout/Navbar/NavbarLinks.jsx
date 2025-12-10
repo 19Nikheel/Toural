@@ -1,12 +1,11 @@
-// src/components/layout/Navbar/NavbarLinks.jsx
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function NavbarLinks() {
   const links = [
-    // Later you can enable these when Results/others are ready:
-    // { label: "Trips", to: "/results" },
-    // { label: "My Trips", to: "/my-trips" },
+    { label: "Home", to: "/" },
+    { label: "Trips", to: "/results" },
+    { label: "My Trips", to: "/my-trips" },
   ];
 
   return (

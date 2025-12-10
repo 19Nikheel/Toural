@@ -6,12 +6,12 @@ import { UserMenu } from "../../user/UserMenu";
 
 const NavbarActions = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { userAuthenticated } = useAuth();
 
   return (
     <div className="flex items-center gap-2">
       {/* <ThemeToggle /> */}
-      {!user ? (
+      {userAuthenticated ? (
         <>
           <Button
             variant="secondary"

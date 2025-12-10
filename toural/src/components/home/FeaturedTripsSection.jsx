@@ -1,11 +1,13 @@
 import React from "react";
 import SectionHeader from "../ui/SectionHeader";
 import FeaturedTripCard from "./FeaturedTripCard";
-import { DESTINATIONS } from "../../data/destinations";
+import { useNavigate } from "react-router-dom";
+import { useTour } from "../../context/TourContext";
 
 export default function FeaturedTripsSection() {
-  const featured = DESTINATIONS.slice(0, 3);
-
+  const { tours } = useTour();
+  const feature = tours.slice(0, 2);
+  const navigate = useNavigate();
   return (
     <section className="flex w-full flex-col gap-4 lg:w-[75%] mx-auto items-center">
       <SectionHeader
@@ -15,6 +17,7 @@ export default function FeaturedTripsSection() {
         action={
           <button
             type="button"
+            onClick={() => navigate("/results")}
             className="text-[0.7rem] text-slate-500 transition-colors hover:text-emerald-500 dark:text-slate-400 dark:hover:text-emerald-300"
           >
             View all →
@@ -22,7 +25,7 @@ export default function FeaturedTripsSection() {
         }
       />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
-        {featured.map((trip) => (
+        {feature.map((trip) => (
           <FeaturedTripCard key={trip.id} trip={trip} />
         ))}
       </div>

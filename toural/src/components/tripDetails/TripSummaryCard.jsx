@@ -2,16 +2,27 @@ import React from "react";
 import Card from "../ui/Card";
 import Pill from "../ui/Pill";
 
+const capitalize = (str = "") =>
+  str.length ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+
 export const TripSummaryCard = ({ destination }) => {
-  const avgPrice =
-    destination.stayOptions && destination.stayOptions.length
-      ? Math.round(
-          destination.stayOptions.reduce((sum, s) => sum + s.pricePerNight, 0) /
-            destination.stayOptions.length
-        )
+  if (!destination) return null;
+
+  const basePrice =
+    typeof destination.price === "number"
+      ? Math.round(destination.price)
       : null;
 
-  const approxTrip = avgPrice ? avgPrice * destination.suggestedNights : 0;
+  // tags can be a comma separated string or array
+  const tagsArray =
+    typeof destination.tags === "string"
+      ? destination.tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean)
+      : Array.isArray(destination.tags)
+      ? destination.tags.filter(Boolean)
+      : [];
 
   return (
     <Card padding="p-5" className="w-full">
@@ -25,34 +36,47 @@ export const TripSummaryCard = ({ destination }) => {
           </Pill>
         </div>
 
-        <div className="flex items-baseline justify-between text-sm">
+        <div className="flex flex-col gap-1 text-sm">
           <div>
             <p className="text-[0.7rem] text-slate-500 dark:text-slate-400">
-              Approx trip cost
+              Starting from
             </p>
             <p className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-              {approxTrip ? `₹${approxTrip.toLocaleString("en-IN")}` : "TBD"}
+              {basePrice
+                ? `₹${basePrice.toLocaleString("en-IN")}`
+                : "Contact for pricing"}
             </p>
-            {avgPrice && (
-              <p className="text-[0.7rem] text-slate-500 dark:text-slate-400">
-                ~₹{avgPrice.toLocaleString("en-IN")} / night ·{" "}
-                {destination.suggestedNights} nights
-              </p>
-            )}
           </div>
+
+          {destination.cityName && (
+            <p className="text-[0.75rem] text-slate-600 dark:text-slate-300">
+              📍 {destination.cityName}
+            </p>
+          )}
+
+          {destination.bestSeason && (
+            <p className="text-[0.7rem] text-slate-500 dark:text-slate-400">
+              Best season:{" "}
+              <span className="text-slate-800 dark:text-slate-100">
+                {destination.bestSeason}
+              </span>
+            </p>
+          )}
         </div>
 
-        <div className="flex flex-wrap gap-1.5 text-[0.7rem]">
-          {destination.tags?.slice(0, 5).map((tag) => (
-            <Pill
-              key={tag}
-              variant="subtle"
-              className="px-2 py-0.5 text-[0.7rem]"
-            >
-              {tag}
-            </Pill>
-          ))}
-        </div>
+        {tagsArray.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 text-[0.7rem] mt-1">
+            {tagsArray.map((tag, index) => (
+              <Pill
+                key={`${tag}-${index}`}
+                variant="subtle"
+                className="px-2 py-0.5 text-[0.7rem]"
+              >
+                {capitalize(tag)}
+              </Pill>
+            ))}
+          </div>
+        )}
       </div>
     </Card>
   );

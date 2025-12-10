@@ -7,7 +7,7 @@ export const TripHeroHeader = ({ destination }) => (
     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div className="space-y-2">
         <p className="text-[0.7rem] uppercase tracking-[0.18em] text-slate-400">
-          {destination.region} · {destination.country}
+          {destination.cityName} · India
         </p>
         <h1 className="text-2xl font-semibold md:text-3xl">
           {destination.name}
@@ -17,10 +17,8 @@ export const TripHeroHeader = ({ destination }) => (
           plan around this destination.
         </p>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-[0.75rem]">
-          <RatingStars rating={destination.rating} size="sm" />
-          <span className="text-slate-300">
-            {destination.rating.toFixed(1)} · Highly rated by travellers
-          </span>
+          <RatingStars rating="4.5" size="sm" />
+          <span className="text-slate-300">· Highly rated by travellers</span>
           <span className="h-1 w-1 rounded-full bg-slate-500" />
           <span className="text-slate-300">
             Best season: {destination.bestSeason}
@@ -29,18 +27,25 @@ export const TripHeroHeader = ({ destination }) => (
       </div>
 
       <div className="flex flex-col items-end gap-2 text-right text-[0.8rem]">
-        <Pill
+        {/* <Pill
           variant="highlight"
           className="bg-emerald-400/15 text-emerald-200"
         >
           {destination.suggestedNights} nights suggested
-        </Pill>
-        <p className="text-[0.8rem] text-slate-300">
+        </Pill> */}
+        {/* <p className="text-[0.8rem] text-slate-300">
           Perfect for{" "}
           <span className="font-medium text-slate-50">
-            {destination.tags?.slice(0, 3).join(" · ")}
+            {destination.tags
+              ? destination.tags
+                  .split(",")
+                  .map((t) => t.trim())
+                  .filter(Boolean)
+                  .slice(0, 3)
+                  .join(" · ")
+              : null}
           </span>
-        </p>
+        </p> */}
       </div>
     </div>
   </section>
