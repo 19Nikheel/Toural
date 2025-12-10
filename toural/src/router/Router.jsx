@@ -15,6 +15,7 @@ import TripDetailsPage from "../pages/TripDetailsPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import PaymentStatusPage from "../pages/PaymentStatusPage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import HotelDetailsPage from "../pages/HotelDetailsPage";
 
 const MainLayout = ({ children }) => (
   <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 flex flex-col">
@@ -84,6 +85,14 @@ const AppRouter = () => (
             <PaymentStatusPage />
           </MainLayout>
         </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/hotels/:hotelId"
+      element={
+        <MainLayout>
+          <HotelDetailsPage />
+        </MainLayout>
       }
     />
 

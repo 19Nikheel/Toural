@@ -87,7 +87,7 @@ const TripDetailsPage = () => {
 
   // Safe fallbacks for nested data
   const highlights = destination.highlights || [];
-  const stayOptions = destination.stayOptions || [];
+  const stayOptions = destination.hotels || [];
   const suggestedNights = destination.suggestedNights || 3; // fallback if not provided
 
   return (

@@ -31,13 +31,14 @@ const AuthProvider = ({ children }) => {
     window.location.href = import.meta.env.VITE_REDIRECT_URI;
   };
 
-  const signup = async (firstname, lastname, email, password) => {
+  const signup = async (firstname, lastname, email, type, password) => {
+    let name = firstname + " " + lastname;
     try {
       const response = await axiosInstance.post("/auth/signup", {
-        firstname,
-        lastname,
-        // username,
+        name,
         email,
+        phone,
+        type,
         password,
       });
       if (response.status == 200) {

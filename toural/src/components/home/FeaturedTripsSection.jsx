@@ -26,7 +26,7 @@ export default function FeaturedTripsSection() {
       />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
         {feature.map((trip) => (
-          <FeaturedTripCard key={trip.id} trip={trip} />
+          <FeaturedTripCard key={trip.id.timestamp} trip={trip} />
         ))}
       </div>
     </section>

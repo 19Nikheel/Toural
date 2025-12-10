@@ -1,3 +1,4 @@
+// src/pages/ResultsPage.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTour } from "../context/TourContext";
@@ -88,56 +89,60 @@ export default function ResultsPage() {
   }, [tours, budget, nights, travelers, placePreference, vibe]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-10 pt-6 md:px-6">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+      <div className="mx-auto max-w-6xl px-4 pb-10 pt-6 md:px-6">
         <SectionHeader
           eyebrow="Your trip blueprint"
           title="Tailored destinations matching your budget & vibe"
           subtitle={`Adjust filters to refine where you stay & what you see.`}
           action={
-            <span className="text-[0.7rem] text-slate-400">
+            <span className="text-[0.7rem] text-slate-500 dark:text-slate-400">
               {filtered.length} match{filtered.length !== 1 ? "es" : ""} found
             </span>
           }
         />
 
-        {/* Filter controls */}
-        <div className="rounded-3xl border border-white/10 bg-slate-900/70 p-4 shadow-[0_18px_60px_rgba(15,23,42,0.9)] backdrop-blur-xl">
+        {/* Filter controls (card) */}
+        <div className="rounded-3xl border border-slate-200/10 bg-white/60 dark:border-white/10 dark:bg-slate-900/70 p-4 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl">
           <div className="grid gap-3 md:grid-cols-4">
             {/* Budget */}
             <div>
               <FieldLabel
                 htmlFor="budget"
                 right={
-                  <span className="rounded-full bg-slate-800/80 px-2 py-0.5 text-[0.65rem] text-emerald-300">
+                  <span className="app-badge">
                     ₹{budget.toLocaleString("en-IN")}
                   </span>
                 }
               >
                 Budget (₹)
               </FieldLabel>
-              <RangeSlider
-                id="budget"
-                min={15000}
-                max={200000}
-                step={5000}
-                value={budget}
-                onChange={(e) => setBudget(Number(e.target.value))}
-                className="mt-1"
-              />
-              <div className="mt-1 flex justify-between text-[0.6rem] text-slate-400">
-                <span>₹15k</span>
-                <span>₹2L+</span>
+
+              {/* Use the project's RangeSlider but also keep a fallback class */}
+              <div className="mt-1">
+                <RangeSlider
+                  id="budget"
+                  min={15000}
+                  max={200000}
+                  step={5000}
+                  value={budget}
+                  onChange={(e) => setBudget(Number(e.target.value))}
+                  className="app-range"
+                />
+                <div className="mt-1 flex justify-between text-[0.6rem] text-slate-500 dark:text-slate-400">
+                  <span>₹15k</span>
+                  <span>₹2L+</span>
+                </div>
               </div>
             </div>
 
             {/* Nights */}
             <div>
               <FieldLabel htmlFor="nights">Nights</FieldLabel>
-              <div className="mt-1 flex items-center rounded-2xl border border-white/10 bg-black/40 px-3 py-2 text-xs">
+              <div className="mt-1 flex items-center rounded-2xl border border-slate-200/10 dark:border-white/10 bg-white/20 dark:bg-black/20 px-3 py-2 text-xs">
                 <button
                   type="button"
-                  className="mr-2 rounded-full border border-white/10 px-2 py-0.5 text-xs text-slate-300 hover:border-emerald-400 hover:text-emerald-300"
+                  className="mr-2 rounded-full border border-slate-200/10 dark:border-white/10 px-2 py-0.5 text-xs text-slate-700 dark:text-slate-300 hover:border-emerald-400 hover:text-emerald-400"
                   onClick={() => setNights((n) => (n > 1 ? n - 1 : 1))}
                 >
                   −
@@ -153,11 +158,11 @@ export default function ResultsPage() {
                       Math.min(15, Math.max(1, Number(e.target.value) || 1))
                     )
                   }
-                  className="w-full bg-transparent text-center text-sm text-slate-50 outline-none"
+                  className="app-input bg-transparent text-center text-sm text-slate-900 dark:text-slate-50 outline-none"
                 />
                 <button
                   type="button"
-                  className="ml-2 rounded-full border border-white/10 px-2 py-0.5 text-xs text-slate-300 hover:border-emerald-400 hover:text-emerald-300"
+                  className="ml-2 rounded-full border border-slate-200/10 dark:border-white/10 px-2 py-0.5 text-xs text-slate-700 dark:text-slate-300 hover:border-emerald-400 hover:text-emerald-400"
                   onClick={() => setNights((n) => (n < 15 ? n + 1 : 15))}
                 >
                   +
@@ -168,10 +173,10 @@ export default function ResultsPage() {
             {/* Travellers */}
             <div>
               <FieldLabel htmlFor="travelers">Travellers</FieldLabel>
-              <div className="mt-1 flex items-center rounded-2xl border border-white/10 bg-black/40 px-3 py-2 text-xs">
+              <div className="mt-1 flex items-center rounded-2xl border border-slate-200/10 dark:border-white/10 bg-white/20 dark:bg-black/20 px-3 py-2 text-xs">
                 <button
                   type="button"
-                  className="mr-2 rounded-full border border-white/10 px-2 py-0.5 text-xs text-slate-300 hover:border-emerald-400 hover:text-emerald-300"
+                  className="mr-2 rounded-full border border-slate-200/10 dark:border-white/10 px-2 py-0.5 text-xs text-slate-700 dark:text-slate-300 hover:border-emerald-400 hover:text-emerald-400"
                   onClick={() => setTravelers((t) => (t > 1 ? t - 1 : 1))}
                 >
                   −
@@ -187,11 +192,11 @@ export default function ResultsPage() {
                       Math.min(10, Math.max(1, Number(e.target.value) || 1))
                     )
                   }
-                  className="w-full bg-transparent text-center text-sm text-slate-50 outline-none"
+                  className="app-input bg-transparent text-center text-sm text-slate-900 dark:text-slate-50 outline-none"
                 />
                 <button
                   type="button"
-                  className="ml-2 rounded-full border border-white/10 px-2 py-0.5 text-xs text-slate-300 hover:border-emerald-400 hover:text-emerald-300"
+                  className="ml-2 rounded-full border border-slate-200/10 dark:border-white/10 px-2 py-0.5 text-xs text-slate-700 dark:text-slate-300 hover:border-emerald-400 hover:text-emerald-400"
                   onClick={() => setTravelers((t) => (t < 10 ? t + 1 : 10))}
                 >
                   +
@@ -210,68 +215,76 @@ export default function ResultsPage() {
                 value={placePreference}
                 onChange={(e) => setPlacePreference(e.target.value)}
                 placeholder="Kolkata, heritage, river cruise..."
-                className="mt-1"
+                className="mt-1 app-input"
               />
             </div>
           </div>
 
-          {/* Vibe row (optional, re-enable if your tags contain these vibes) */}
+          {/* Vibe row (optional) */}
+          {/* Uncomment if your tags include vibes — styles below are theme-aware */}
           {/* <div className="mt-4">
             <FieldLabel>Trip vibe</FieldLabel>
             <div className="mt-2 flex flex-wrap gap-2">
               {vibeOptions.map((v) => (
-                <SelectableChip
+                <button
                   key={v.id}
-                  active={vibe === v.id}
+                  className={`app-chip ${vibe === v.id ? "app-chip--active" : ""}`}
                   onClick={() => setVibe(v.id)}
                 >
                   <span>{v.icon}</span>
-                  <span>{v.label}</span>
-                </SelectableChip>
+                  <span className="ml-1">{v.label}</span>
+                </button>
               ))}
             </div>
           </div> */}
         </div>
 
         {/* Results summary */}
-        <div>
-          <p className="text-xs text-slate-400">
+        <div className="mt-4">
+          <p className="text-xs text-slate-600 dark:text-slate-400">
             Showing trips for{" "}
-            <span className="text-slate-200">
+            <span className="text-slate-900 dark:text-slate-50">
               ₹{budget.toLocaleString("en-IN")}
             </span>{" "}
-            budget, <span className="text-slate-200">{nights}</span> nights,{" "}
-            <span className="text-slate-200">{travelers}</span> traveller
+            budget,{" "}
+            <span className="text-slate-900 dark:text-slate-50">{nights}</span>{" "}
+            nights,{" "}
+            <span className="text-slate-900 dark:text-slate-50">
+              {travelers}
+            </span>{" "}
+            traveller
             {travelers > 1 ? "s" : ""}.
           </p>
         </div>
 
         {/* Loading or results */}
-        {loading ? (
-          <div className="mt-4 text-center text-sm text-slate-300">
-            Loading trips...
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="mt-4 flex flex-1 flex-col items-center justify-center rounded-3xl border border-dashed border-slate-700 bg-slate-900/60 px-6 py-10 text-center">
-            <div className="mb-3 text-3xl">🧳</div>
-            <p className="text-sm font-medium text-slate-100">
-              No trips exactly match this configuration.
-            </p>
-            <p className="mt-1 max-w-sm text-xs text-slate-400">
-              Try increasing your budget, reducing nights, or clearing the place
-              preference &amp; vibe filters to see more options.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {filtered.map((destination) => (
-              <DestinationCard
-                key={destination.id?.timestamp || destination.name}
-                destination={destination}
-              />
-            ))}
-          </div>
-        )}
+        <div className="mt-4">
+          {loading ? (
+            <div className="text-center text-sm text-slate-600 dark:text-slate-400">
+              Loading trips...
+            </div>
+          ) : filtered.length === 0 ? (
+            <div className="empty-state mt-4 rounded-3xl px-6 py-10">
+              <div className="mb-3 text-3xl">🧳</div>
+              <p className="text-sm font-medium text-slate-900 dark:text-slate-50">
+                No trips exactly match this configuration.
+              </p>
+              <p className="mt-1 max-w-sm text-xs text-slate-600 dark:text-slate-400">
+                Try increasing your budget, reducing nights, or clearing the
+                place preference &amp; vibe filters to see more options.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {filtered.map((destination) => (
+                <DestinationCard
+                  key={destination.id ?? destination.name}
+                  destination={destination}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

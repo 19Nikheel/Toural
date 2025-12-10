@@ -42,7 +42,7 @@ export default function FeaturedTripCard({ trip }) {
       className="relative overflow-hidden cursor-pointer border-slate-200/60 bg-slate-50/80 dark:border-white/8 dark:bg-white/5 hover:shadow-lg transition-shadow"
     >
       <div
-        className={`relative h-28 w-full overflow-hidden rounded-3xl bg-gradient-to-r ${heroColor}`}
+        className={`relative h-30 w-full overflow-hidden rounded-3xl bg-gradient-to-r ${heroColor}`}
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.35),transparent_60%)]" />
         <div className="absolute inset-0 flex flex-col justify-between p-4">

@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ children }) => {
   // While we’re checking localStorage, avoid flashing
   if (initializing) return null;
 
-  if (false) {
+  if (!userAuthenticated) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
