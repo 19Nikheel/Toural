@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a1a4fab-d0b2-426b-b083-356f4b8c3de0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/JwtResponce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/CustomUserDetailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Repo/BaseUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Repo/BaseUserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,27 +62,36 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Toural/HotelService/HotelService/HotelService"
+    "last_opened_file_path": "D:/Toural/UserService/src/main/java/com/Toural/UserService/Service"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Toural\AuthServer\AuthServer\src\main\java\com\Toural\AuthServer\Security" />
-      <recent name="D:\Toural\AuthServer\AuthServer\src\main\java\com\Toural\AuthServer\Config" />
-      <recent name="D:\Toural\AuthServer\AuthServer\src\main\resources\db\migration" />
-      <recent name="D:\Toural\RatingService\RatingService\src\main\resources\db\migration" />
+      <recent name="D:\Toural\UserService\src\main\java\com\Toural\UserService\Service" />
+      <recent name="D:\Toural\UserService\src\main\java\com\Toural\UserService\Config" />
+      <recent name="D:\Toural\AuthenticationServer\AuthServer\src\main\java\com\toural\AuthServer\AuthServer\DTO" />
+      <recent name="D:\Toural\AuthenticationServer\AuthServer\src\main\java\com\toural\AuthServer\AuthServer\Service" />
+      <recent name="D:\Toural\AuthenticationServer\AuthServer\src\main\java\com\toural\AuthServer\AuthServer\Config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.Toural.UserService.DTO" />
+      <recent name="com.toural.AuthServer.AuthServer.DTO" />
+      <recent name="com.toural.AuthServer.AuthServer.Repo" />
+      <recent name="com.toural.AuthServer.AuthServer.Entity" />
       <recent name="com.Toural.AuthServer.Repo" />
-      <recent name="com.Toural.AuthServer.Util" />
-      <recent name="com.Toural.AuthServer.Models" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="Unnamed" type="AntRunConfiguration" nameIsGenerated="true">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="API-Gateway" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.APIGateway.APIGateway.ApiGatewayApplication" />
+      <module name="APIGateway" />
       <extension name="net.ashald.envfile">
         <option name="IS_ENABLED" value="false" />
         <option name="IS_SUBST" value="false" />
@@ -152,6 +176,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Ant Target.Unnamed" />
       <item itemvalue="Application.API-Gateway" />
       <item itemvalue="Application.ServiceRegistry" />
       <item itemvalue="Application.RatingServiceApplication" />
@@ -159,8 +184,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RatingServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.RatingServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -181,15 +206,53 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/springGateway/springGateway/src/main/java/com/Toural/springGateway/Config/GatewayConfig.java</url>
           <line>11</line>
-          <properties class="com.Toural.springGateway.Config.GatewayConfig" method="httpClient">
+          <properties class="com.Toural.springGateway.Config.GatewayConfig">
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java</url>
+          <line>34</line>
+          <properties class="com.toural.AuthServer.AuthServer.Config.SecurityConfig" method="securityFilterChain">
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/springGateway/springGateway/src/main/java/com/Toural/springGateway/Config/GatewayConfig.java</url>
           <line>13</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

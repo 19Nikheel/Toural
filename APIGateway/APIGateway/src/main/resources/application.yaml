@@ -20,6 +20,10 @@ spring:
           predicates:
             - Path=/hotels/**,/city/**
 
+        - id: AUTHSERVER
+          uri: lb://AUTHSERVER
+          predicates:
+            - Path=/auth/**
 
 
 

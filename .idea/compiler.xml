@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="AuthServer" />
         <module name="UserService" />
         <module name="ServiceRegistry" />
       </profile>
-      <profile name="Annotation profile for HotelService" enabled="true">
+      <profile name="Annotation profile for RatingService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -23,7 +24,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AuthServer" target="20" />
       <module name="springGateway" target="20" />
       <module name="toural" target="20" />
     </bytecodeTargetLevel>
