@@ -3,7 +3,7 @@ spring:
     name: hotel-service
   data:
     mongodb:
-      uri: mongodb+srv://jyotish1136:DHCuSqLQHSWLKzJu@cluster0.rskzw.mongodb.net/geodb
+      uri: mongodb+srv://geodb:OLZJdtObRhhUXysY@vtnosql1.goby2su.mongodb.net/geodb
 
 
 server:

@@ -18,7 +18,7 @@ spring:
         - id: HOTEL-SERVICE
           uri: lb://HOTEL-SERVICE
           predicates:
-            - Path=/hotels/**,/city/**
+            - Path=/hotels/**,/city/**,/tours/**,/state/**
 
         - id: AUTHSERVER
           uri: lb://AUTHSERVER

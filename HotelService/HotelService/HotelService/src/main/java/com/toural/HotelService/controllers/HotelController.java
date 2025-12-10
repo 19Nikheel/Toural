@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hotels")
+@RequestMapping("hotels")
+@CrossOrigin(
+        origins = "http://localhost:5173",
+        allowCredentials = "true"
+)
+
 public class HotelController {
     @Autowired
     private HotelService hotelService;
@@ -26,7 +31,7 @@ public class HotelController {
         return hotelService.findAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Hotel> addHotel(@RequestBody Hotel hotel){
         City city = cityRepo.findByCityName(hotel.getCityName()).get();
         if (city!=null){
@@ -47,5 +52,14 @@ public class HotelController {
             return ResponseEntity.ok(hotels);
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{hotelId}")
+    public ResponseEntity<Hotel> updateHotel(
+            @PathVariable String hotelId,
+            @RequestBody Hotel hotelRequest
+    ) {
+        Hotel updated = hotelService.updateHotel(hotelId, hotelRequest);
+        return ResponseEntity.ok(updated);
     }
 }
