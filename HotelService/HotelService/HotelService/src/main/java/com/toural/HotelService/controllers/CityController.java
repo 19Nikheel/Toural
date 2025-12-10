@@ -1,25 +1,23 @@
 package com.toural.HotelService.controllers;
 
 import com.toural.HotelService.entities.City;
-import com.toural.HotelService.entities.State;
 import com.toural.HotelService.repos.CityRepo;
-import com.toural.HotelService.repos.StateRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/city")
+@RequestMapping("city")
+@CrossOrigin(
+        origins = "http://localhost:5173",
+        allowCredentials = "true"
+)
+
 public class CityController {
     @Autowired
     private CityRepo cityRepo;
-    @Autowired
-    private StateRepo stateRepo;
 
     @GetMapping("/city-let/{let}")
     public ResponseEntity<?> findCities(@PathVariable String let){
@@ -29,21 +27,25 @@ public class CityController {
         }
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/state")
-    public State func3(){
-        return stateRepo.findByStateCode("01").get();
-    }
 
-    @GetMapping("/city")
+    @GetMapping("city")
     public List<City> func4(){
         return cityRepo.findAll();
     }
     @GetMapping("/city-code/{cityCode}")
-    public City findCity(@PathVariable String cityCode){
-        return cityRepo.findByCityCode(cityCode).get();
+    public ResponseEntity<City> findCity(@PathVariable String cityCode){
+        City city = cityRepo.findByCityCode(cityCode).get();
+        if (city!=null){
+            return ResponseEntity.ok(city);
+        }
+        return ResponseEntity.notFound().build();
     }
     @GetMapping("/city-name/{cityName}")
-    public City findCityName(@PathVariable String cityName){
-        return cityRepo.findByCityName(cityName).get();
+    public ResponseEntity<City> findCityName(@PathVariable String cityName){
+        City city = cityRepo.findByCityName(cityName).get();
+        if (city!=null){
+            return ResponseEntity.ok(city);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
