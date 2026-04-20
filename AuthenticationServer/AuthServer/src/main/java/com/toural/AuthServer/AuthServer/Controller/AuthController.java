@@ -20,8 +20,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -46,19 +44,21 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Request jwtRequest) {
-        System.out.println(jwtRequest.getUserName());
+        System.out.println(jwtRequest.getUsername());
 
-        this.doAuthenticate(jwtRequest.getUserName(),jwtRequest.getPassword());
+        this.doAuthenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
 
-        UserDetails userDetails=userDetailsService.loadUserByUsername(jwtRequest.getUserName());
+        UserDetails userDetails=userDetailsService.loadUserByUsername(jwtRequest.getUsername());
 
 
-        String str = sendService.receiveFromB(jwtRequest.getUserName());
+        String str = sendService.receiveFromB(jwtRequest.getUsername());
         String token=this.jwtHelper.generateToken(userDetails,str);
+
+        System.out.println(token);
 
         JwtResponce responce= new JwtResponce();
         responce.setJwttoken(token);
-        responce.setUsername(jwtRequest.getUserName());
+        responce.setUsername(jwtRequest.getUsername());
         responce.setRole(jwtRequest.getRole());
         return new ResponseEntity<>(responce, HttpStatus.OK);
     }

@@ -2,26 +2,30 @@ package com.toural.HotelService.controllers;
 
 import com.toural.HotelService.entities.City;
 import com.toural.HotelService.entities.Hotel;
+import com.toural.HotelService.entities.State;
 import com.toural.HotelService.repos.CityRepo;
+import com.toural.HotelService.repos.HotelRepo;
 import com.toural.HotelService.repos.StateRepo;
 import com.toural.HotelService.services.HotelService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.text.Normalizer;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("hotels")
-@CrossOrigin(
-        origins = "http://localhost:5173",
-        allowCredentials = "true"
-)
-
 public class HotelController {
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private HotelRepo hotelRepo;
+
     @Autowired
     private CityRepo cityRepo;
     @Autowired
@@ -62,4 +66,6 @@ public class HotelController {
         Hotel updated = hotelService.updateHotel(hotelId, hotelRequest);
         return ResponseEntity.ok(updated);
     }
+
+
 }

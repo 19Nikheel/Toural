@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a1a4fab-d0b2-426b-b083-356f4b8c3de0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/CityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/StateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/StateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/City.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/CityRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/CityRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/StateRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/StateRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,13 +43,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="36Q826BAxw21LOKkG0JrJnA3AvP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -41,9 +58,23 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.API-Gateway.executor": "Run",
+    "Application.HotelService.executor": "Debug",
+    "Application.RatingServiceApplication.executor": "Run",
+    "Application.ServiceRegistry.executor": "Run",
+    "Application.UserServiceApplication.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/uip"
+    "Spring Boot.AuthServerApplication.executor": "Run",
+    "Spring Boot.HotelServiceApplication.executor": "Debug",
+    "git-widget-placeholder": "staging",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Spring-AI",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -62,7 +93,7 @@
       <recent name="com.Toural.AuthServer.Repo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserServiceApplication">
+  <component name="RunManager" selected="Application.ServiceRegistry">
     <configuration name="Unnamed" type="AntRunConfiguration" nameIsGenerated="true">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -87,7 +118,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RatingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServer" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.toural.AuthServer.AuthServer.AuthServerApplication" />
+      <module name="AuthServer" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HotelService" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="25" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.toural.HotelService.HotelServiceApplication" />
+      <module name="HotelService" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RatingServiceApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-25" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.Toural.rating.RatingService.RatingServiceApplication" />
@@ -157,18 +226,25 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Ant Target.Unnamed" />
+      <item itemvalue="Application.HotelService" />
       <item itemvalue="Application.API-Gateway" />
       <item itemvalue="Application.ServiceRegistry" />
       <item itemvalue="Application.RatingServiceApplication" />
+      <item itemvalue="Application.AuthServer" />
       <item itemvalue="Application.UserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.RatingServiceApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -192,23 +268,10 @@
           </properties>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java</url>
-          <line>34</line>
-          <properties class="com.toural.AuthServer.AuthServer.Config.SecurityConfig" method="securityFilterChain">
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/springGateway/springGateway/src/main/java/com/Toural/springGateway/Config/GatewayConfig.java</url>
           <line>13</line>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
@@ -227,13 +290,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
-          <line>50</line>
+          <line>48</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
           <line>61</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

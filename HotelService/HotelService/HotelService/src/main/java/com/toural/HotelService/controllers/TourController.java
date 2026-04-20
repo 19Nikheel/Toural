@@ -11,10 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("tours")
-@CrossOrigin(
-        origins = "http://localhost:5173",
-        allowCredentials = "true"
-)
 public class TourController {
     @Autowired
     private TourService tourService;

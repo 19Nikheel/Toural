@@ -3,11 +3,11 @@ spring:
     name: hotel-service
   data:
     mongodb:
-      uri: mongodb+srv://geodb:OLZJdtObRhhUXysY@vtnosql1.goby2su.mongodb.net/geodb
+      uri: mongodb://localhost:27017/Toural
 
 
 server:
-  port: 8087
+  port: 9090
 
 
 eureka:

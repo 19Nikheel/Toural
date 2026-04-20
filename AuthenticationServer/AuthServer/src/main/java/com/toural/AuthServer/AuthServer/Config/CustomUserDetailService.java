@@ -29,6 +29,12 @@ public class CustomUserDetailService implements UserDetailsService {
         System.out.println();
         Optional<AuthUser> byUsername = authUserRepo.findByUsername(username);
 
+        System.out.println();
+        System.out.println(byUsername.get().getUsername());
+        System.out.println(byUsername.get().getPassword());
+        System.out.println(byUsername.get().getRole());
+        System.out.println();
+
 
 
         if(byUsername.isEmpty()){

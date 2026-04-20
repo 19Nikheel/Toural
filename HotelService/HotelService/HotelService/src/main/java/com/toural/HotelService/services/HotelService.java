@@ -26,14 +26,11 @@ public class HotelService {
     }
     public Hotel updateHotel(String hotelId, Hotel updated) {
         Hotel existing =  hotelRepo.findByHotelId(hotelId).get();
-        existing.setGovHotelId(updated.getGovHotelId());
         existing.setHotelName(updated.getHotelName());
         existing.setDescription(updated.getDescription());
         existing.setStateName(updated.getStateName());
         existing.setCityName(updated.getCityName());
         existing.setAddressLine(updated.getAddressLine());
-        existing.setZipcode(updated.getZipcode());
-        existing.setPlusCode(updated.getPlusCode());
         existing.setSingleRoom(updated.getSingleRoom());
         existing.setDoubleRoom(updated.getDoubleRoom());
         existing.setSuite(updated.getSuite());

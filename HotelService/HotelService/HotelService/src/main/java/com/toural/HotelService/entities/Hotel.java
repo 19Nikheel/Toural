@@ -16,14 +16,21 @@ public class Hotel {
     private ObjectId id;
     @Indexed(unique = true)
     private String hotelId;
-    private String govHotelId;
     private String hotelName;
     private String description;
     private String stateName;
     private String cityName;
     private String addressLine;
-    private String zipcode;
-    private String plusCode;
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    private String pincode;
     private Integer singleRoom;
     private Integer doubleRoom;
     private Integer suite;
@@ -50,13 +57,6 @@ public class Hotel {
         this.hotelId = hotelId;
     }
 
-    public String getGovHotelId() {
-        return govHotelId;
-    }
-
-    public void setGovHotelId(String govHotelId) {
-        this.govHotelId = govHotelId;
-    }
 
     public String getHotelName() {
         return hotelName;
@@ -98,21 +98,7 @@ public class Hotel {
         this.addressLine = addressLine;
     }
 
-    public String getZipcode() {
-        return zipcode;
-    }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getPlusCode() {
-        return plusCode;
-    }
-
-    public void setPlusCode(String plusCode) {
-        this.plusCode = plusCode;
-    }
 
     public Integer getSingleRoom() {
         return singleRoom;

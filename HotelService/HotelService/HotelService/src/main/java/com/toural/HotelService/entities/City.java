@@ -15,6 +15,10 @@ public class City {
     @Indexed
     private String cityName;
 
+    public City() {
+
+    }
+
     public ObjectId getId() {
         return id;
     }

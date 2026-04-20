@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,28 +34,36 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf->csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource())).authorizeHttpRequests(auth->auth.requestMatchers("/").authenticated()
-                        .requestMatchers("/auth/login","/auth/signup")
-                        .permitAll()
-                        .anyRequest().authenticated()).exceptionHandling(ex->ex.authenticationEntryPoint(point))
-                .sessionManagement(ses->ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+                .csrf(csrf -> csrf.disable())
+                 // <- use withDefaults so Spring Security picks up your CorsConfigurationSource bean
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/login", "/auth/signup").permitAll() // allow anonymous access to auth endpoints
+                        .requestMatchers("/").authenticated()                        // root requires auth
+                        .anyRequest().authenticated()
+                )
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                .sessionManagement(ses -> ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//
+//        configuration.addAllowedOriginPattern("*"); // allow all origins
+//        configuration.addAllowedMethod("*");        // allow all HTTP methods
+//        configuration.addAllowedHeader("*");        // allow all headers
+//        configuration.setAllowCredentials(false);   // must be false when using "*"
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//
+//        return source;
+//    }
 
 
     @Bean

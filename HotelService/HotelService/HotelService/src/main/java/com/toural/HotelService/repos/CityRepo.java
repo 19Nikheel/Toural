@@ -15,4 +15,8 @@ public interface CityRepo extends MongoRepository<City, ObjectId> {
     Optional<City> findByCityName(String cityName);
     @Query("{ 'cityName': { $regex: ?0, $options: 'i' } }")
     List<City> findByCityNameContainingIgnoreCase(String letters);
+
+    City findByCityNameIgnoreCaseAndStateNameIgnoreCase(String cityName, String stateName);
+
+    City findByCityNameIgnoreCase(String cityName);
 }
