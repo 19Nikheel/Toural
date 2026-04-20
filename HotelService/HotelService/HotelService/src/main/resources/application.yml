@@ -3,7 +3,11 @@ spring:
     name: hotel-service
   data:
     mongodb:
+<<<<<<< Updated upstream
       uri: mongodb://localhost:27017/Toural
+=======
+      uri: mongodb://localhost:27017/toural
+>>>>>>> Stashed changes
 
 
 server:
