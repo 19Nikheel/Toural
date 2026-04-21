@@ -33,8 +33,4 @@ public class DriverRatingAgg {
 
     public Long getReviewCount() { return reviewCount; }
     public void setReviewCount(Long reviewCount) { this.reviewCount = reviewCount; }
-
-
-
-
 }

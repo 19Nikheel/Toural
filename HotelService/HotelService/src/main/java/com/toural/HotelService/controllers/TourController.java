@@ -14,6 +14,18 @@ import java.util.List;
 public class TourController {
     @Autowired
     private TourService tourService;
+
+    @GetMapping("/city-let/{let}")
+    public ResponseEntity<?> findCities(@PathVariable String let){
+        List<Tour> tours = tourService.findByCityContainingIgnoreCase(let);
+        if (tours!=null && !tours.isEmpty()){
+            return ResponseEntity.ok(tours);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+
+
     @GetMapping
     public ResponseEntity<List<Tour>> findAll() {
         List<Tour> tours  = tourService.findAll();
@@ -52,10 +64,10 @@ public class TourController {
 
     @PutMapping
     public ResponseEntity<Tour> updateTour(@RequestBody Tour tour) {
-        if (tour!=null) {
-            Tour tour1 = tourService.updateTour(tour);
-            return ResponseEntity.ok().body(tour1);
-        }
+//        if (tour!=null) {
+//            Tour tour1 = tourService.updateTour(tour);
+//            return ResponseEntity.ok().body(tour1);
+//        }
         return ResponseEntity.badRequest().build();
     }
     @PutMapping("/id/{id}")
@@ -66,4 +78,7 @@ public class TourController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+
+
 }

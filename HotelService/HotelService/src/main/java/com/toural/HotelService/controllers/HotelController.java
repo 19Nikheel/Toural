@@ -67,5 +67,10 @@ public class HotelController {
         return ResponseEntity.ok(updated);
     }
 
-
+    @GetMapping("/{hotelId}")
+    public ResponseEntity<Hotel> findHotelById(@PathVariable String hotelId){
+        System.out.println("conter hotelId:"+hotelId);
+        Hotel hotel = hotelRepo.findByHotelId(hotelId).get();
+        return ResponseEntity.ok(hotel);
+    }
 }

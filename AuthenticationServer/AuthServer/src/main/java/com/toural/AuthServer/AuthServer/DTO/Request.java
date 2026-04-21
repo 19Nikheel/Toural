@@ -4,6 +4,7 @@ package com.toural.AuthServer.AuthServer.DTO;
 public class Request {
     private String username;
     private String password;
+    private String role;
 
     public String getRole() {
         return role;
@@ -19,7 +20,7 @@ public class Request {
         this.role = role;
     }
 
-    private String role;
+
 
     public Request() {
     }

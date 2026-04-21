@@ -8,12 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
     @Bean
-    @LoadBalanced
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
-    }
-    @Bean
     public WebClient webClient(WebClient.Builder builder) {
-        return builder.baseUrl("http://FASTAPI-SERVICE").build();
+        return builder.baseUrl("http://localhost:8000").build();
     }
 }

@@ -1,11 +1,12 @@
 package com.toural.AuthServer.AuthServer.DTO;
 
 
-import jakarta.persistence.Column;
-
 public class SignupPacket {
     private String name;
     private String email;
+    private String password;
+    private String phoneNo;
+    private String type;
 
     public String getName() {
         return name;
@@ -57,11 +58,4 @@ public class SignupPacket {
         this.phoneNo = phoneNo;
         this.type = type;
     }
-
-    private String password;
-    private String phoneNo;
-
-    private String type;
-
-
 }

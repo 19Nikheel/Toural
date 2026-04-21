@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelService {
@@ -42,5 +43,16 @@ public class HotelService {
         existing.setPolicies(updated.getPolicies());
 
         return hotelRepo.save(existing);
+    }
+
+    public Hotel findByHotelId(String hotelId) {
+        Hotel byHotelId = null;
+        try {
+            byHotelId = hotelRepo.findByHotelId(hotelId).get();
+            if (byHotelId != null) return byHotelId;
+        } catch (Exception e) {
+            System.out.println("hotelId not found");
+        }
+        return null;
     }
 }
