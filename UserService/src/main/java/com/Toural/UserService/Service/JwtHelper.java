@@ -46,7 +46,13 @@ public class JwtHelper {
 
     //for retrieveing any information from token we will need the secret key
     public Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        //Key key = Keys.hmacShaKeyFor(secret.getBytes());
+
+        return  Jwts.parserBuilder()
+                .setSigningKey(secret)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
 
@@ -61,10 +67,10 @@ public class JwtHelper {
 
 
     //validate token
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
+    public Boolean validateToken(String token) {
+        //final String username = getUsernameFromToken(token);
 
 
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return  !isTokenExpired(token);
     }
 }

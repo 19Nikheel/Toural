@@ -2,8 +2,10 @@ package com.toural.AuthServer.AuthServer.DTO;
 
 
 public class Request {
-    private String username;
+    private String userName;
     private String password;
+
+
 
     public String getRole() {
         return role;
@@ -14,7 +16,7 @@ public class Request {
     }
 
     public Request(String userName, String password, String role) {
-        this.username = userName;
+        this.userName = userName;
         this.password = password;
         this.role = role;
     }
@@ -25,17 +27,17 @@ public class Request {
     }
 
     public Request(String userName, String password) {
-        this.username = userName;
+        this.userName = userName;
         this.password = password;
 
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getPassword() {

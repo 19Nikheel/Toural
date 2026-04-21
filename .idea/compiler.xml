@@ -11,7 +11,7 @@
         <module name="UserService" />
         <module name="ServiceRegistry" />
       </profile>
-      <profile name="Annotation profile for RatingService" enabled="true">
+      <profile name="Annotation profile for APIGateway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -19,8 +19,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
         <module name="RatingService" />
-        <module name="HotelService" />
         <module name="APIGateway" />
+        <module name="HotelService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

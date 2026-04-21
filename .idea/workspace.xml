@@ -7,22 +7,14 @@
     <list default="true" id="6a1a4fab-d0b2-426b-b083-356f4b8c3de0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/CityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/StateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/StateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Hotel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/CityRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/CityRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/StateRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/StateRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Entity/AuthUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Entity/AuthUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +51,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.API-Gateway.executor": "Run",
-    "Application.HotelService.executor": "Debug",
+    "Application.AuthServer.executor": "Run",
+    "Application.HotelService.executor": "Run",
     "Application.RatingServiceApplication.executor": "Run",
     "Application.ServiceRegistry.executor": "Run",
-    "Application.UserServiceApplication.executor": "Run",
+    "Application.UserServiceApplication.executor": "Debug",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.AuthServerApplication.executor": "Run",
@@ -93,7 +87,7 @@
       <recent name="com.Toural.AuthServer.Repo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServiceRegistry">
+  <component name="RunManager" selected="Application.UserServiceApplication">
     <configuration name="Unnamed" type="AntRunConfiguration" nameIsGenerated="true">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -275,33 +269,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
-          <line>41</line>
+          <line>43</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
-          <line>49</line>
+          <line>51</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
-          <line>42</line>
+          <line>44</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
+          <line>243</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/HotelService/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
