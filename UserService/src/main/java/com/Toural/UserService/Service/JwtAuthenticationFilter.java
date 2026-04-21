@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -84,9 +85,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails user=this.userDetailsService.loadUserByUsername(username);
+           // UserDetails user=this.userDetailsService.loadUserByUsername(username);
 
-            boolean validatetoken=this.jwthelper.validateToken(token,user);
+            boolean validatetoken=this.jwthelper.validateToken(token);
+
+            String userName=this.jwthelper.getUsernameFromToken(token);
+
+            String role= (String)this.jwthelper.getAllClaimsFromToken(token).get("role");
+            UserDetails user= User.withUsername(userName)
+                    .password("ioi")
+                    .roles(role)
+                    .build();
 
             if(validatetoken){
                 UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());

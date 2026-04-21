@@ -81,6 +81,7 @@ public class JwtHelper {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         Map<String, Object> claims = new HashMap<>();
 
+        //claims.put("email",);
         claims.put("role", user.getRole());
         return doGenerateToken(claims, s);
     }

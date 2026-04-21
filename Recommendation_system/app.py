@@ -11,6 +11,8 @@ app = FastAPI()
 # 🔹 Load your dataset (use your cleaned df_new file if saved)
 df_new = pd.read_csv("df_new.csv")
 
+df_places = pd.read_csv("df.csv")
+
 # 🔹 Recreate model (or load precomputed)
 tfidf = TfidfVectorizer(stop_words='english')
 tfidf_matrix = tfidf.fit_transform(df_new['features'])
@@ -18,6 +20,25 @@ cosine_sim = cosine_similarity(tfidf_matrix)
 
 # 🔹 Mapping
 indices = pd.Series(df_new.index, index=df_new['property_name']).drop_duplicates()
+
+
+
+
+name_to_index_places = {
+    name.lower(): i for i, name in enumerate(df_places["name"])
+}
+
+df_places.columns = df_places.columns.str.strip().str.lower().str.replace(" ", "_")
+
+df_places["features"] = (
+    df_places["type"].astype(str) + " " +
+    df_places["significance"].astype(str) + " " +
+    df_places["best_time_to_visit"].astype(str)
+)
+
+tfidf_matrix_places = tfidf.fit_transform(df_places["features"])
+
+cosine_sim_places = cosine_similarity(tfidf_matrix_places)
 
 # 🔹 Recommendation function
 def recommend(hotel_name, top_n=5):
@@ -119,6 +140,119 @@ def recommend_in_district(hotel_name, top_n=5):
     return df_new[['uniq_id','property_name','city']].iloc[hotel_indices].to_dict(orient="records")
 
 
+ # 🔹 Recommend 
+def recommend_place(place_name, top_n=5):
+    idx = name_to_index_places.get(place_name.lower())
+    if idx is None:
+        return []
+
+    sim_scores = sorted(
+        list(enumerate(cosine_sim_places[idx])),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    results, seen = [], set()
+
+    for i, _ in sim_scores:
+        row = df_places.iloc[i]
+        name = row["name"]
+
+        if name.lower() != place_name.lower() and name not in seen:
+            results.append({
+                "uniq_id": int(row["uniq_id"]), 
+                "name": name,
+                "city": row["city"],
+                "state": row["state"]
+            })
+            seen.add(name)
+
+        if len(results) == top_n:
+            break
+
+    return results
+
+
+# 🔹 Recommend within SAME CITY
+def recommend_place_in_city(place_name, top_n=5):
+    idx = name_to_index_places.get(place_name.lower())
+    if idx is None:
+        return []
+
+    target_city = df_places.iloc[idx]["city"]
+
+    sim_scores = sorted(
+        list(enumerate(cosine_sim_places[idx])),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    results, seen = [], set()
+
+    for i, _ in sim_scores:
+        row = df_places.iloc[i]
+        name = row["name"]
+
+        if (
+            row["city"] == target_city and
+            name.lower() != place_name.lower() and
+            name not in seen
+        ):
+            results.append({
+                "uniq_id": int(row["uniq_id"]), 
+                "name": name,
+                "city": row["city"],
+                "state": row["state"]
+            })
+            seen.add(name)
+
+        if len(results) == top_n:
+            break
+
+    return results
+
+
+# 🔹 Recommend within SAME state
+
+def recommend_place_in_state(place_name, top_n=5):
+    idx = name_to_index_places.get(place_name.lower())
+    if idx is None:
+        return []
+
+    target_state = df_places.iloc[idx]["state"]
+
+    sim_scores = sorted(
+        list(enumerate(cosine_sim_places[idx])),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    results, seen = [], set()
+
+    for i, _ in sim_scores:
+        row = df_places.iloc[i]
+        name = row["name"]
+
+        if (
+            row["state"] == target_state and
+            name.lower() != place_name.lower() and
+            name not in seen
+        ):
+            results.append({
+                "uniq_id": int(row["uniq_id"]),    
+                "name": name,
+                "city": row["city"],
+                "state": row["state"]
+            })
+            seen.add(name)
+
+        if len(results) == top_n:
+            break
+
+    return results
+
+
+
 # 🔥 API endpoint
 @app.get("/recommend")
 def get_recommendation(hotel_name: str, top_n: int = 5):
@@ -133,15 +267,32 @@ def api_recommend_city(hotel_name: str, top_n: int = 5):
 def api_recommend_district(hotel_name: str, top_n: int = 5):
     return recommend_in_district(hotel_name, top_n)
 
-# Register with Eureka
-@app.on_event("startup")
-async def startup():
-    await eureka_client.init_async(
-        eureka_server="http://localhost:8761/eureka",
-        app_name="fastapi-service",
-        instance_port=8000,
-    )
 
-@app.on_event("shutdown")
-async def shutdown():
-    await eureka_client.stop_async()
+
+@app.get("/places/recommend")
+def api_place(place_name: str, top_n: int = 5):
+    return recommend_place(place_name, top_n)
+
+
+@app.get("/places/recommend/city")
+def api_place_city(place_name: str, top_n: int = 5):
+    return recommend_place_in_city(place_name, top_n)
+
+
+@app.get("/places/recommend/state")
+def api_place_state(place_name: str, top_n: int = 5):
+    return recommend_place_in_state(place_name, top_n)
+
+
+# # Register with Eureka
+# @app.on_event("startup")
+# async def startup():
+#     await eureka_client.init_async(
+#         eureka_server="http://localhost:8761/eureka",
+#         app_name="fastapi-service",
+#         instance_port=8000,
+#     )
+
+# @app.on_event("shutdown")
+# async def shutdown():
+#     await eureka_client.stop_async()

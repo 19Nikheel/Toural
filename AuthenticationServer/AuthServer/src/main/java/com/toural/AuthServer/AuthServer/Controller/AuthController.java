@@ -44,7 +44,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Request jwtRequest) {
-        System.out.println(jwtRequest.getUsername());
+        System.out.println(jwtRequest);
+        System.out.println(jwtRequest.getUsername()+"66");
 
         this.doAuthenticate(jwtRequest.getUsername(),jwtRequest.getPassword());
 
@@ -54,7 +55,7 @@ public class AuthController {
         String str = sendService.receiveFromB(jwtRequest.getUsername());
         String token=this.jwtHelper.generateToken(userDetails,str);
 
-        System.out.println(token);
+        System.out.println(token+"56");
 
         JwtResponce responce= new JwtResponce();
         responce.setJwttoken(token);
@@ -82,7 +83,7 @@ public class AuthController {
             boolean result = sendService.sendToB(ps);
 
             if(result){
-                return ResponseEntity.ok().body(result);
+                return ResponseEntity.ok().body("Registered Successfully");
             }else{
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
