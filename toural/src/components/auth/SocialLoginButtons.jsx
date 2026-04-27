@@ -10,7 +10,7 @@ export default function SocialLoginButtons() {
         <Button
           variant="secondary"
           size="md"
-          className="w-full justify-center border border-slate-200 bg-white text-slate-800 dark:border-white/15 dark:bg-white/5 dark:text-slate-100"
+          className="w-full justify-center border border-[#F4A261]/25 bg-white/80 backdrop-blur-md text-[#333] hover:bg-[#F4A261]/10 hover:text-[#C9622A] hover:border-[#F4A261]/50"
         >
           <span className="text-lg">🟦</span>
           <span className="text-xs font-medium">Continue with Google</span>

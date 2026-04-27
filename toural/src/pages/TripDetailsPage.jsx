@@ -1,116 +1,132 @@
 import React, { useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TripHeroHeader } from "../components/tripDetails/TripHeroHeader";
-import { TripSummaryCard } from "../components/tripDetails/TripSummaryCard";
-import { StayOptionsList } from "../components/tripDetails/StayOptionsList";
 import { IncludedHighlights } from "../components/tripDetails/IncludedHighlights";
 import { DaywisePlan } from "../components/tripDetails/DaywisePlan";
 import { RatingSummarySection } from "../components/tripDetails/RatingSummarySection";
 import { ReviewsList } from "../components/tripDetails/ReviewsList";
-import { ActionBar } from "../components/tripDetails/ActionBar";
-import { useTour } from "../context/TourContext";
+import Card from "../components/ui/Card";
+import Pill from "../components/ui/Pill";
+import NearbyHotels from "../components/hotels/NearByHotels";
 
 const MOCK_REVIEWS = [
   {
     id: 1,
     name: "Aarav S.",
     rating: 4.8,
-    text: "Amazing balance of sightseeing and downtime. The suggested stays were spot on for our budget.",
+    text: "Amazing place with great historical significance.",
   },
   {
     id: 2,
     name: "Neha K.",
     rating: 4.6,
-    text: "Loved the highlights and local recommendations. Made it very easy to customise for our family.",
+    text: "Best visited in evening, very beautiful lighting.",
   },
 ];
 
 const TripDetailsPage = () => {
-  const { featured, tours, loading } = useTour();
-  const { id } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const destination = useMemo(() => {
-    if (!Array.isArray(tours)) return null;
+  const destination = location.state?.place;
 
-    return (
-      tours.find((d) => {
-        if (d.id && typeof d.id === "object" && "timestamp" in d.id) {
-          return String(d.id.timestamp) === String(id);
-        }
-        return String(d.id) === String(id);
-      }) || null
-    );
-  }, [tours, id]);
-
-  const handleCheckout = () => {
-    if (!destination) return;
-    const tripId =
-      destination.id && typeof destination.id === "object"
-        ? destination.id.timestamp
-        : destination.id;
-
-    navigate(`/checkout?tripId=${tripId}`);
-    alert("Proceed to booking (mock). Wire to CheckoutPage later.");
-  };
-
-  // Loading state if context is still fetching
-  if (loading && !destination) {
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center text-sm text-slate-500">
-        Loading trip details...
-      </div>
-    );
-  }
-
-  // Not found state
   if (!destination) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-center">
-        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
-          Trip not found
-        </p>
-        <p className="text-[0.85rem] text-slate-500 dark:text-slate-400">
-          This itinerary doesn&apos;t exist in your data. Try selecting another
-          destination from the results page.
-        </p>
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="mt-2 text-[0.8rem] text-emerald-600 underline-offset-2 hover:underline dark:text-emerald-300"
-        >
-          Back to results
+        <p className="text-sm font-semibold text-[#1a1a1a]">Place not found</p>
+        <button onClick={() => navigate(-1)} className="text-sm text-[#C9622A]">
+          Go Back
         </button>
       </div>
     );
   }
 
-  // Safe fallbacks for nested data
-  const highlights = destination.highlights || [];
-  const stayOptions = destination.hotels || [];
-  const suggestedNights = destination.suggestedNights || 3; // fallback if not provided
+  const highlights = destination.features
+    ? destination.features.split(" ")
+    : [];
 
   return (
     <div className="flex flex-col gap-6 pb-8">
-      <TripHeroHeader destination={destination} />
+      {/* HERO */}
+      <TripHeroHeader
+        destination={{
+          name: destination.name,
+          cityName: destination.city,
+          bestSeason: destination.best_time_to_visit,
+          tags: destination.features,
+        }}
+      />
 
-      <div className="mt-4 grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        {/* Left column */}
+      <div className="grid gap-5 lg:grid-cols-[2fr_1fr]">
+        {/* LEFT */}
         <div className="flex flex-col gap-4">
+          {/* DETAILS CARD */}
+          <Card padding="p-5">
+            <h2 className="text-sm font-semibold text-[#C9622A] mb-3">
+              Place Details
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-[0.8rem] text-[#555]">
+              <div>
+                🏛 Type: <b>{destination.type}</b>
+              </div>
+              <div>
+                📍 Zone: <b>{destination.zone}</b>
+              </div>
+              <div>
+                📅 Established: <b>{destination.establishment_year}</b>
+              </div>
+              <div>
+                ⏱ Time: <b>{destination.time_needed_to_visit_in_hrs} hrs</b>
+              </div>
+              <div>
+                🌇 Best Time: <b>{destination.best_time_to_visit}</b>
+              </div>
+              <div>
+                📅 Weekly Off: <b>{destination.weekly_off}</b>
+              </div>
+              <div>
+                📷 DSLR: <b>{destination.dslr_allowed}</b>
+              </div>
+              <div>
+                ✈ Airport: <b>{destination.airport_with_50km_radius}</b>
+              </div>
+              <div>
+                ⭐ Reviews:{" "}
+                <b>{destination.number_of_google_review_in_lakhs}L</b>
+              </div>
+            </div>
+
+            <div className="mt-3 flex flex-wrap gap-2">
+              {highlights.map((h, i) => (
+                <Pill key={i}>{h}</Pill>
+              ))}
+            </div>
+          </Card>
+
           <IncludedHighlights highlights={highlights} />
-          <DaywisePlan highlights={highlights} nights={suggestedNights} />
-          <RatingSummarySection rating={4.5} />
+          <DaywisePlan highlights={highlights} nights={2} />
+          <RatingSummarySection rating={destination.google_review_rating} />
           <ReviewsList reviews={MOCK_REVIEWS} />
         </div>
 
-        {/* Right column */}
+        {/* RIGHT */}
         <div className="flex flex-col gap-4">
-          <TripSummaryCard destination={destination} />
-          <StayOptionsList stays={stayOptions} />
+          <Card padding="p-5">
+            <h2 className="text-sm font-semibold text-[#C9622A] mb-2">
+              Entry Info
+            </h2>
+            <p className="text-[0.8rem] text-[#555]">
+              {destination.entrance_fee_in_inr === 0
+                ? "Free Entry"
+                : `₹${destination.entrance_fee_in_inr}`}
+            </p>
+          </Card>
+
+          {/* Nearby Hotels */}
+          <NearbyHotels city={destination.city} />
         </div>
       </div>
-
-      <ActionBar onCheckout={handleCheckout} />
     </div>
   );
 };

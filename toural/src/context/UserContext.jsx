@@ -14,19 +14,19 @@ const UserContext = createContext({
 const UserProvider = ({ children }) => {
   const { getToken, userAuthenticated } = useAuth();
   const [user, setUser] = useState({
-    firstname: "Jyotish",
-    lastname: "Kumar",
-    email: "abc@gmail.com",
+    firstname: "",
+    lastname: "",
+    email: "",
+    id: "",
   });
 
   const getUser = async () => {
-    if (!userAuthenticated || !getToken()) return null;
     try {
-      const token = getToken();
-      const response = await axiosInstance.get("/user", {
+      const token = localStorage.getItem("jwtToken");
+      const response = await axiosInstance.get("/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (response.status === 200) {
+      if (response.status === 202) {
         setUser(response.data);
         return response;
       }
@@ -37,7 +37,7 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!user && getToken()) {
+    if (userAuthenticated) {
       getUser();
     }
   }, [userAuthenticated]);
@@ -48,7 +48,7 @@ const UserProvider = ({ children }) => {
       const response = await axiosInstance.put(
         "/user",
         { firstname, lastname },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       if (response.status === 200) {
         setUser(response.data);
@@ -67,7 +67,7 @@ const UserProvider = ({ children }) => {
       const response = await axiosInstance.put(
         "/user",
         { username, password },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       if (response.status === 200) {
         setUser(response.data);
@@ -104,7 +104,7 @@ const UserProvider = ({ children }) => {
     } catch (error) {
       console.error(
         "Validation failed:",
-        error.response?.data || error.message
+        error.response?.data || error.message,
       );
       return {
         status: error.response?.status || 500,

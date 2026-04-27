@@ -1,10 +1,8 @@
-// src/components/layout/Navbar/Navbar.jsx
 import React, { useState } from "react";
 import BrandLogo from "./BrandLogo";
 import NavbarLinks from "./NavbarLinks";
 import NavbarActions from "./NavbarActions";
 import MobileMenu from "./MobileMenu";
-import ThemeToggle from "../../ui/ThemeToggle";
 import { useAuth } from "../../../context/AuthContext";
 
 export default function Navbar() {
@@ -12,19 +10,60 @@ export default function Navbar() {
   const { userAuthenticated } = useAuth();
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200/60 bg-slate-50/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80 w-full">
-      <div className="mx-auto flex max-w-8xl items-center justify-between px-8 py-3 md:px-6">
+    <header className="sticky top-0 z-50 w-full px-6 pt-4">
+      <div
+        className="
+        mx-auto flex max-w-7xl items-center justify-between
+        px-5 py-3 rounded-2xl
+        
+        bg-white/70
+        backdrop-blur-[28px] saturate-150
+        
+        border border-[#F4A261]/20
+        
+        shadow-[0_2px_24px_rgba(244,162,97,0.12)]
+        
+        before:absolute before:inset-0 before:rounded-2xl
+        before:pointer-events-none
+        before:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-1px_0_rgba(244,162,97,0.08)]
+        
+        relative
+      "
+      >
+        {/* LEFT */}
         <BrandLogo />
-        {true && <NavbarLinks />}
 
-        <div className="flex items-center gap-2">
+        {/* CENTER */}
+        <div className="hidden md:flex">
+          <NavbarLinks />
+        </div>
+
+        {/* RIGHT */}
+        <div className="flex items-center gap-3">
           <NavbarActions />
-          <div className="flex items-center gap-2 md:hidden">
-            {/* <ThemeToggle /> */}
+
+          {/* Mobile Toggle */}
+          <div className="flex items-center md:hidden">
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/70 bg-slate-100/80 text-slate-700 shadow-sm transition hover:border-emerald-400 hover:text-emerald-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-emerald-400"
+              className="
+                flex h-9 w-9 items-center justify-center
+                rounded-xl
+                
+                bg-white/80
+                backdrop-blur-md
+                
+                border border-[#F4A261]/30
+                
+                text-[#777]
+                
+                transition-all duration-200
+                
+                hover:bg-[#F4A261]/10
+                hover:border-[#F4A261]/50
+                hover:text-[#C9622A]
+              "
               aria-label="Toggle navigation menu"
             >
               {mobileOpen ? "✕" : "☰"}
@@ -33,6 +72,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
   );

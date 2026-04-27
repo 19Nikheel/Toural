@@ -1,20 +1,68 @@
-// src/components/layout/Navbar/BrandLogo.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function BrandLogo() {
+  const navigate = useNavigate();
+
   return (
-    <a href="/" className="flex items-center gap-2">
-      <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-500 text-lg font-bold text-slate-950 shadow-lg shadow-emerald-500/40">
+    <button
+      onClick={() => navigate("/")}
+      className="flex items-center gap-3 group"
+    >
+      {/* Logo Icon */}
+      <div
+        className="
+          flex h-9 w-9 items-center justify-center
+          rounded-xl
+          
+          bg-[#F4A261]
+          
+          text-white text-sm
+          
+          shadow-[0_4px_14px_rgba(244,162,97,0.4)]
+          
+          transition-all duration-200
+          group-hover:shadow-[0_6px_20px_rgba(244,162,97,0.5)]
+          group-hover:-translate-y-[1px]
+        "
+      >
         ✈️
       </div>
-      <div>
-        <p className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+
+      {/* Brand Text */}
+      <div className="leading-tight">
+        <p
+          className="
+            font-serif text-[20px] font-semibold
+            text-[#1a1a1a]
+            tracking-[-0.2px]
+          "
+        >
           Toural
+          {/* <sup
+            className="
+              ml-[2px]
+              text-[9px]
+              font-sans
+              text-[#F4A261]
+              uppercase tracking-wider
+            "
+          >
+            ai
+          </sup> */}
         </p>
-        <p className="text-[0.7rem] uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+
+        <p
+          className="
+            text-[10px]
+            font-sans
+            uppercase tracking-[0.25em]
+            text-[#777]
+          "
+        >
           Smart Tour Planner
         </p>
       </div>
-    </a>
+    </button>
   );
 }

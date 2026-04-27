@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import AmbientBackground from "../components/layout/AmbientBackground";
+import UserProfilePage from "../components/user/UserProfilePage";
 import Navbar from "../components/layout/Navbar/Navbar";
 import PageShell from "../components/layout/PageShell";
 import Footer from "../components/layout/Footer";
@@ -16,9 +17,11 @@ import CheckoutPage from "../pages/CheckoutPage";
 import PaymentStatusPage from "../pages/PaymentStatusPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import HotelDetailsPage from "../pages/HotelDetailsPage";
+import AllPlacesPage from "../components/home/AllPlacesPage";
+import HotelsListPage from "../components/hotels/HotelsListPage";
 
 const MainLayout = ({ children }) => (
-  <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50 flex flex-col">
+  <div className="min-h-screen bg-white text-[#1a1a1a] flex flex-col">
     <AmbientBackground />
     <Navbar />
     <PageShell>{children}</PageShell>
@@ -36,12 +39,52 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
+    <Route
+      path="/destination"
+      element={
+        <MainLayout>
+          <AllPlacesPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/hotels"
+      element={
+        <MainLayout>
+          <HotelsListPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/hotel"
+      element={
+        <MainLayout>
+          <HotelDetailsPage />
+        </MainLayout>
+      }
+    />
 
     <Route
       path="/results"
       element={
         <MainLayout>
           <ResultsPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/trip-details"
+      element={
+        <MainLayout>
+          <TripDetailsPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/profile"
+      element={
+        <MainLayout>
+          <UserProfilePage />
         </MainLayout>
       }
     />
@@ -87,6 +130,7 @@ const AppRouter = () => (
         </ProtectedRoute>
       }
     />
+
     <Route
       path="/hotels/:hotelId"
       element={
@@ -104,6 +148,7 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
+
     <Route
       path="/signup"
       element={

@@ -31,36 +31,35 @@ const AuthProvider = ({ children }) => {
     window.location.href = import.meta.env.VITE_REDIRECT_URI;
   };
 
-  const signup = async (firstname, lastname, email, type, password) => {
-    let name = firstname + " " + lastname;
+  const signup = async (form) => {
     try {
       const response = await axiosInstance.post("/auth/signup", {
-        name,
-        email,
-        phone,
-        type,
-        password,
+        name: form.firstname.trim() + " " + form.lastname.trim(),
+        email: form.email.trim(),
+        phoneNo: form.phone.trim(),
+        type: form.role,
+        password: form.password,
       });
       if (response.status == 200) {
-        const token = response.data;
-        localStorage.setItem("jwtToken", token);
-        setJwtToken(token);
-        return response;
+        alert("Sign up successful. Please login!!");
       }
     } catch (error) {
       console.error("Error signup ", error);
     }
   };
 
-  const login = async (email, password) => {
+  const login = async (form) => {
     const response = await axiosInstance.post("/auth/login", {
-      email,
-      password,
+      username: form.email,
+      password: form.password,
+      role: "USER",
     });
     if (response.status === 200) {
       const token = response.data;
-      localStorage.setItem("jwtToken", token);
-      setJwtToken(token);
+      if (token) {
+        localStorage.setItem("jwtToken", token);
+        setJwtToken(token);
+      }
       return response;
     }
   };

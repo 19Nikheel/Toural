@@ -38,6 +38,16 @@ export const TourProvider = ({ children }) => {
     }
   }, []);
 
+  const fetchTourByCity = async (city) => {
+    try {
+      const res = await axiosInstance.get(`/tours/city/${city}`);
+      const data = res.data;
+      return data;
+    } catch (err) {
+      console.error("Error fetching tours by city code:", err);
+    }
+  };
+
   const fetchTours = useCallback(async () => {
     try {
       setInitialLoading(true);
@@ -115,7 +125,7 @@ export const TourProvider = ({ children }) => {
       setTours((prev) => prev.map((t) => (t.id === updated.id ? updated : t)));
 
       setSelectedTour((prev) =>
-        prev && prev.id === updated.id ? updated : prev
+        prev && prev.id === updated.id ? updated : prev,
       );
 
       return updated;
@@ -165,6 +175,7 @@ export const TourProvider = ({ children }) => {
     setSelectedTour,
     setError,
     fetchToursByCityCode,
+    fetchTourByCity,
   };
 
   return <TourContext.Provider value={value}>{children}</TourContext.Provider>;

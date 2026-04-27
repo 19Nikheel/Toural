@@ -7,9 +7,10 @@ export const ReviewsList = ({ reviews }) => {
 
   return (
     <Card padding="p-5" className="w-full">
-      <h2 className="mb-3 text-sm font-semibold text-slate-900 dark:text-slate-50">
+      <h2 className="mb-3 text-sm font-semibold text-[#C9622A]">
         Recent reviews
       </h2>
+
       <div className="space-y-3">
         {reviews.map((r) => (
           <ReviewItem key={r.id} review={r} />

@@ -1,4 +1,3 @@
-// src/components/ui/Card.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,35 +9,36 @@ export default function Card({
   ...props
 }) {
   const baseClasses = `
-    rounded-3xl
-    min-h-fit             /* More height for richer card visuals */
-    border border-slate-200/60
-    bg-white/95
-    dark:border-white/10
-    dark:bg-slate-900/80
-    backdrop-blur-xl
-    shadow-[0_14px_50px_rgba(0,0,0,0.08)]
-    dark:shadow-[0_18px_70px_rgba(0,0,0,0.55)]
+    relative
+    rounded-2xl
+    min-h-fit
+    border border-[#F4A261]/20
+    bg-white/80
+    backdrop-blur-[24px]
+    shadow-[0_8px_32px_rgba(244,162,97,0.12)]
+    
+    before:absolute before:inset-0 before:rounded-2xl
+    before:pointer-events-none
+    before:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-1px_0_rgba(244,162,97,0.08)]
+    
     transition-all duration-300 ease-[cubic-bezier(.4,0,.2,1)]
   `;
 
   const hoverClasses = hover
     ? `
-      hover:scale-[1.025]
-      hover:-translate-y-1.5
-      hover:border-emerald-400/80
-      hover:shadow-[0_28px_90px_rgba(16,185,129,0.32)]
-      dark:hover:border-emerald-300/70
+      hover:-translate-y-1
+      hover:border-[#F4A261]/40
+      hover:shadow-[0_16px_40px_rgba(244,162,97,0.2)]
     `
     : "";
 
   const textEnhance = `
-    text-[1rem]              /* Base text upscaled */
-    md:text-[1.05rem]        /* Slightly bigger on desktop */
+    text-[0.95rem]
+    md:text-[1rem]
     leading-relaxed
-    text-slate-700
-    dark:text-slate-200
+    text-[#555]
   `;
+
   return (
     <div
       className={`${baseClasses} ${textEnhance} ${padding} ${hoverClasses} ${className}`}

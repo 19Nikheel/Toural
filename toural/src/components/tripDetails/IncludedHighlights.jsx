@@ -4,7 +4,6 @@ import Card from "../ui/Card";
 export const IncludedHighlights = ({ highlights }) => {
   if (!highlights) return null;
 
-  // Convert comma-separated string → array (trim to remove spaces)
   const highlightsArray = highlights
     .map((h) => h.trim())
     .filter((h) => h.length > 0);
@@ -13,13 +12,15 @@ export const IncludedHighlights = ({ highlights }) => {
 
   return (
     <Card padding="p-5" className="w-full">
-      <h2 className="mb-2 text-sm font-semibold text-slate-900 dark:text-slate-50">
+      <h2 className="mb-2 text-sm font-semibold text-[#C9622A]">
         Key Highlights
       </h2>
-      <ul className="space-y-1.5 text-[0.8rem] text-slate-600 dark:text-slate-300">
+
+      <ul className="space-y-2 text-[0.8rem] text-[#555]">
         {highlightsArray.map((h, index) => (
           <li key={`${h}-${index}`} className="flex items-start gap-2">
-            {">"} <span>{h}</span>
+            <span className="text-[#F4A261]">➤</span>
+            <span>{h}</span>
           </li>
         ))}
       </ul>

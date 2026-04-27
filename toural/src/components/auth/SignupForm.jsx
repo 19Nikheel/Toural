@@ -41,7 +41,6 @@ export default function SignupForm() {
     if (!form.phone?.trim()) {
       nextErrors.phone = "Phone number is required.";
     } else if (!/^\+?\d{7,15}$/.test(form.phone.trim())) {
-      // basic international-ish phone validation
       nextErrors.phone = "Enter a valid phone number (7-15 digits).";
     }
 
@@ -70,18 +69,9 @@ export default function SignupForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    // call signup - make sure your AuthContext.signup accepts these args
     try {
-      const response = await signup({
-        firstname: form.firstname.trim(),
-        lastname: form.lastname.trim(),
-        email: form.email.trim(),
-        phone: form.phone.trim(),
-        type: form.role,
-        password: form.password,
-      });
+      const response = await signup(form);
 
-      // If your signup returns a response object, adjust checks accordingly
       if (response && (response.status === 200 || response.ok)) {
         navigate("/show-alert", {
           state: {
@@ -164,7 +154,7 @@ export default function SignupForm() {
         <div>
           <label
             htmlFor="signup-role"
-            className="mb-1 block text-[0.8rem] font-medium text-slate-700 dark:text-slate-200"
+            className="mb-1 block text-[0.75rem] font-medium text-[#777]"
           >
             Role
           </label>
@@ -173,7 +163,7 @@ export default function SignupForm() {
             name="role"
             value={form.role}
             onChange={handleChange}
-            className="mt-1 w-full rounded-2xl border border-slate-200 bg-white px-3 py-2 text-[0.9rem] outline-none focus:border-emerald-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
+            className="mt-1 w-full rounded-xl border border-[#F4A261]/25 bg-white/80 backdrop-blur-md px-3 py-2 text-[0.85rem] text-[#1a1a1a] outline-none focus:border-[#F4A261]/50"
           >
             <option value="user">User</option>
             <option value="guide">Guide</option>

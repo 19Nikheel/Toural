@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <AuthLayout>
       <AuthHeader
-        title="Welcome back to TripCraft"
+        title="Welcome back to Toural"
         subtitle="Log in to access your saved trips and personalised itineraries."
       />
       <LoginForm />

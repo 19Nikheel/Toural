@@ -1,4 +1,3 @@
-// src/components/ui/FieldLabel.jsx
 import React from "react";
 
 export default function FieldLabel({
@@ -10,10 +9,10 @@ export default function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className={`flex items-center justify-between text-[0.7rem] font-medium text-slate-700 dark:text-slate-200 ${className}`}
+      className={`flex items-center justify-between text-[0.7rem] font-medium text-[#777] ${className}`}
     >
-      <span>{children}</span>
-      {right && <span>{right}</span>}
+      <span className="tracking-wide">{children}</span>
+      {right && <span className="text-[#C9622A]">{right}</span>}
     </label>
   );
 }

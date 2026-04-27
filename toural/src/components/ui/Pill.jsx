@@ -1,13 +1,10 @@
-// src/components/ui/Pill.jsx
 import React from "react";
 
 const variants = {
-  subtle: "bg-slate-100 text-slate-700 dark:bg-white/5 dark:text-slate-200",
-  outline:
-    "border border-slate-200/80 text-slate-700 bg-transparent dark:border-white/15 dark:text-slate-200",
-  highlight:
-    "bg-emerald-500/10 text-emerald-700 border border-emerald-500/40 dark:bg-emerald-500/15 dark:text-emerald-200",
-  soft: "bg-slate-900/80 text-slate-100 dark:bg-black/60 dark:text-slate-100",
+  subtle: "bg-[#F4A261]/10 text-[#C9622A] border border-[#F4A261]/20",
+  outline: "border border-[#F4A261]/30 text-[#555] bg-transparent",
+  highlight: "bg-[#F4A261] text-white border border-[#F4A261]",
+  soft: "bg-white/80 backdrop-blur-md text-[#333] border border-[#F4A261]/20",
 };
 
 export default function Pill({
@@ -21,7 +18,7 @@ export default function Pill({
   const v = variants[variant] || variants.subtle;
   return (
     <Component
-      className={`inline-flex items-center gap-1 rounded-full text-[0.7rem] px-3 py-1 transition ${v} ${className}`}
+      className={`inline-flex items-center gap-1 rounded-full text-[0.7rem] px-3 py-1 transition-all duration-150 ${v} ${className}`}
       {...props}
     >
       {children}

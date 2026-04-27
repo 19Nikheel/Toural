@@ -1,4 +1,3 @@
-// src/components/ui/IconInput.jsx
 import React from "react";
 
 export default function IconInput({
@@ -12,18 +11,16 @@ export default function IconInput({
 }) {
   return (
     <div
-      className={`flex items-center rounded-2xl border border-slate-200/80 bg-slate-50 px-3 py-2 text-xs focus-within:border-emerald-400/80 dark:border-white/12 dark:bg-black/40 ${className}`}
+      className={`flex items-center rounded-xl border border-[#F4A261]/25 bg-white/80 backdrop-blur-md px-3 py-2 text-xs focus-within:border-[#F4A261]/50 ${className}`}
     >
-      <span className="mr-2 text-sm text-slate-500 dark:text-slate-400">
-        {icon}
-      </span>
+      <span className="mr-2 text-sm text-[#F4A261]">{icon}</span>
       <input
         id={id}
         type={type}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 outline-none dark:text-slate-50 dark:placeholder:text-slate-500"
+        className="w-full bg-transparent text-sm text-[#1a1a1a] placeholder:text-[#aaa] outline-none"
       />
     </div>
   );

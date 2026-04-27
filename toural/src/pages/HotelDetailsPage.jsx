@@ -1,159 +1,216 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Card from "../components/ui/Card";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SectionHeader from "../components/ui/SectionHeader";
 import RatingStars from "../components/ui/RatingStars";
-import { useTour } from "../context/TourContext";
+import axiosInstance from "../context/axiosInstance";
 
-const HotelDetailsPage = () => {
-  const { tours } = useTour();
-  const { hotelId } = useParams();
+export default function HotelDetailPage() {
+  const params = new URLSearchParams(location.search);
+  const hotelId = params.get("hotelId");
   const navigate = useNavigate();
-  const [hotels, setHotels] = useState([]);
-  const hotel = useMemo(() => {
-    if (!Array.isArray(hotels)) return null;
-    return hotels.find((h) => h.hotelId === hotelId) || null;
-  }, [hotels, hotelId]);
+
+  const [hotel, setHotel] = useState(null);
+  const [recommended, setRecommended] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHotel = async () => {
+      try {
+        const res = await axiosInstance.get(`/hotels/${hotelId}`);
+        if (res.status === 200) {
+          setHotel(res.data);
+          const recRes = await axiosInstance.post(`/api/recommend`, {
+            hotelName: res.data.hotelName,
+            cityName: res.data.cityName,
+            topN: 5,
+          });
+          const recData = await recRes.data;
+          setRecommended(recData);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotel();
+  }, [hotelId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-[#777]">
+        Loading...
+      </div>
+    );
+  }
+
   if (!hotel) {
     return (
-      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-center">
-        <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">
-          Hotel not found
-        </p>
-        <p className="text-[0.85rem] text-slate-500 dark:text-slate-400">
-          We couldn&apos;t find this hotel in the current list. Try going back
-          to the trip page and selecting it again.
-        </p>
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="mt-2 text-[0.8rem] text-emerald-600 underline-offset-2 hover:underline dark:text-emerald-300"
-        >
-          Back
-        </button>
+      <div className="min-h-screen flex justify-center items-center text-[#777]">
+        Hotel not found
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-5 px-4 pb-10 pt-6 md:px-6">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-[0.7rem] uppercase tracking-[0.18em] text-emerald-400">
-            Hotel
-          </p>
-          <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-            {hotel.hotelName}
-          </h1>
-          <p className="mt-1 text-[0.8rem] text-slate-600 dark:text-slate-300">
-            📍 {hotel.addressLine}, {hotel.cityName} {hotel.zipcode}
-          </p>
-          <p className="mt-0.5 text-[0.75rem] text-slate-500 dark:text-slate-400">
-            Plus code: {hotel.plusCode}
-          </p>
-          <div className="mt-2 flex items-center gap-2 text-[0.85rem]">
-            <RatingStars rating={hotel.rating} />
-            <span className="text-[0.75rem] text-slate-500 dark:text-slate-300">
-              {hotel.rating?.toFixed(1)} / 5
-            </span>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          className="rounded-full border border-slate-300 px-3 py-1 text-[0.75rem] text-slate-600 hover:border-emerald-400 hover:text-emerald-500 dark:border-slate-700 dark:text-slate-300"
-        >
-          ⬅ Back
-        </button>
-      </div>
-
-      {/* Images */}
-      {hotel.images?.length > 0 && (
-        <div className="grid gap-3 md:grid-cols-3">
-          <img
-            src={hotel.images[0]}
-            alt={hotel.hotelName}
-            className="h-52 w-full rounded-2xl object-cover md:col-span-2"
+    <div className="min-h-screen bg-white text-[#1a1a1a] pb-24">
+      <div className="mx-auto max-w-6xl px-4 pt-6 space-y-8">
+        {/* HEADER */}
+        <div className="space-y-3">
+          <SectionHeader
+            eyebrow="Stay details"
+            title={hotel.hotelName}
+            subtitle={`${hotel.cityName}, ${hotel.stateName}`}
           />
-          <div className="flex flex-col gap-3">
-            {hotel.images.slice(1, 3).map((img, idx) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {hotel.images?.map((img, i) => (
               <img
-                key={idx}
-                src={img}
-                alt={`${hotel.hotelName}-${idx}`}
-                className="h-24 w-full rounded-2xl object-cover"
+                key={i}
+                src="/hotel.jpg"
+                className="w-full h-64 object-cover rounded-2xl"
               />
             ))}
           </div>
         </div>
-      )}
 
-      {/* Description + Rooms + Policies */}
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        {/* Left: description & policies */}
-        <div className="flex flex-col gap-4">
-          <Card padding="p-4">
-            <h2 className="mb-2 text-sm font-semibold text-slate-900 dark:text-slate-50">
-              About this stay
-            </h2>
-            <p className="text-[0.8rem] text-slate-600 dark:text-slate-300">
-              {hotel.description}
-            </p>
-            {hotel.hasPool && (
-              <p className="mt-2 text-[0.8rem] text-slate-600 dark:text-slate-300">
-                🏊 This property includes a swimming pool.
+        {/* MAIN */}
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
+          {/* LEFT */}
+          <div className="space-y-6">
+            {/* SUMMARY */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-[#F4A261]/20 p-5">
+                <p className="text-xs text-[#777]">Rating</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <RatingStars rating={hotel.rating || 4} size="sm" />
+                  <span className="font-semibold">{hotel.rating}/5</span>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[#F4A261]/20 p-5 text-right">
+                <p className="text-xs text-[#777]">Pool</p>
+                <p className="text-sm font-medium mt-1">
+                  {hotel.hasPool ? "Available" : "Not available"}
+                </p>
+              </div>
+            </div>
+
+            {/* LOCATION */}
+            <div className="rounded-2xl border border-[#F4A261]/20 p-5">
+              <p className="text-xs text-[#777] mb-1">Location</p>
+              <p className="text-sm">📍 {hotel.addressLine}</p>
+            </div>
+
+            {/* DESCRIPTION */}
+            <div className="rounded-2xl border border-[#F4A261]/20 p-5">
+              <p className="text-xs text-[#777] mb-2">About this place</p>
+              <p className="text-sm text-[#555] leading-relaxed">
+                {hotel.description}
               </p>
-            )}
-          </Card>
+            </div>
 
-          {hotel.policies?.length > 0 && (
-            <Card padding="p-4">
-              <h2 className="mb-2 text-sm font-semibold text-slate-900 dark:text-slate-50">
-                Policies
-              </h2>
-              <ul className="list-disc space-y-1 pl-4 text-[0.8rem] text-slate-600 dark:text-slate-300">
-                {hotel.policies.map((p, idx) => (
-                  <li key={idx}>{p}</li>
+            {/* ROOMS */}
+            <div className="rounded-2xl border border-[#F4A261]/20 p-5">
+              <p className="text-xs text-[#777] mb-3">Room availability</p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { label: "Single", value: hotel.singleRoom },
+                  { label: "Double", value: hotel.doubleRoom },
+                  { label: "Suite", value: hotel.suite },
+                  { label: "Family", value: hotel.familyRoom },
+                ].map((room, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl bg-[#F4A261]/10 p-3 text-center"
+                  >
+                    <p className="text-xs text-[#777]">{room.label}</p>
+                    <p className="font-semibold">{room.value}</p>
+                  </div>
                 ))}
-              </ul>
-            </Card>
-          )}
-        </div>
+              </div>
+            </div>
 
-        {/* Right: room summary */}
-        <div className="flex flex-col gap-4">
-          <Card padding="p-4">
-            <h2 className="mb-3 text-sm font-semibold text-slate-900 dark:text-slate-50">
-              Room summary
-            </h2>
-            <ul className="space-y-1.5 text-[0.8rem] text-slate-700 dark:text-slate-200">
-              <li>🛏 Single rooms: {hotel.singleRoom}</li>
-              <li>🛏 Double rooms: {hotel.doubleRoom}</li>
-              <li>🛏 Suites: {hotel.suite}</li>
-              <li>👨‍👩‍👧 Family rooms: {hotel.familyRoom}</li>
-            </ul>
-          </Card>
+            {/* RECOMMENDED */}
+            {recommended.length > 0 && (
+              <div>
+                <h2 className="text-sm font-semibold text-[#C9622A] mb-3">
+                  Nearby stays
+                </h2>
 
-          <Card padding="p-4">
-            <h2 className="mb-2 text-sm font-semibold text-slate-900 dark:text-slate-50">
-              Booking
-            </h2>
-            <p className="text-[0.8rem] text-slate-600 dark:text-slate-300 mb-2">
-              Pricing is dynamic and depends on dates and occupancy. Continue to
-              booking to see live prices.
-            </p>
-            <button
-              type="button"
-              className="w-full rounded-2xl bg-emerald-500 py-2 text-[0.8rem] font-semibold text-white hover:bg-emerald-600"
-            >
-              Proceed to booking (mock)
-            </button>
-          </Card>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                  {recommended.map((rec) => (
+                    <div
+                      key={rec.hotelId}
+                      onClick={() => navigate(`/hotel?hotelId=${rec.hotelId}`)}
+                      className="cursor-pointer rounded-2xl border border-[#F4A261]/20 overflow-hidden hover:shadow-md"
+                    >
+                      <div className="h-36">
+                        <img
+                          src="/hotel.jpg"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+
+                      <div className="p-3 text-xs space-y-1">
+                        <p className="font-semibold line-clamp-1">
+                          {rec.hotelName}
+                        </p>
+                        <p className="text-[#777]">{rec.cityName}</p>
+
+                        <div className="flex justify-between items-center">
+                          <RatingStars rating={rec.rating || 4} size="xs" />
+                          <span>{rec.rating}/5</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT SIDEBAR */}
+          <div className="hidden lg:block sticky top-20 h-fit">
+            <div className="rounded-2xl border border-[#F4A261]/20 p-5 space-y-3">
+              <p className="text-xs text-[#777]">Quick summary</p>
+
+              <p className="text-sm">
+                📍 {hotel.cityName}, {hotel.stateName}
+              </p>
+              <p className="text-sm">⭐ {hotel.rating}/5 rating</p>
+              <p className="text-sm">
+                Rooms:{" "}
+                {(hotel.singleRoom || 0) +
+                  (hotel.doubleRoom || 0) +
+                  (hotel.suite || 0) +
+                  (hotel.familyRoom || 0)}
+              </p>
+
+              <button className="w-full mt-2 px-4 py-2 rounded-xl bg-[#F4A261] text-white hover:bg-[#e8903e]">
+                Book Now
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* MOBILE FLOAT BAR */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t p-3 flex justify-between items-center lg:hidden">
+        <p className="text-sm font-semibold">
+          Rooms:{" "}
+          {(hotel.singleRoom || 0) +
+            (hotel.doubleRoom || 0) +
+            (hotel.suite || 0) +
+            (hotel.familyRoom || 0)}
+        </p>
+
+        <button className="px-5 py-2 rounded-xl bg-[#F4A261] text-white">
+          Book Now
+        </button>
       </div>
     </div>
   );
-};
-
-export default HotelDetailsPage;
+}

@@ -1,121 +1,113 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "../ui/Card";
 import Pill from "../ui/Pill";
 import RatingStars from "../ui/RatingStars";
-import { HighlightsList } from "./HighlightsList";
-import StayOptionItem from "./StayOptionItem";
+import { useNavigate } from "react-router-dom";
 
-const DestinationCard = ({ destination }) => {
+const DestinationCard = ({ place }) => {
+  if (!place) return null;
+
+  const rating = place.google_review_rating || 4.5;
+
+  const feeLabel =
+    place.entrance_fee_in_inr === 0
+      ? "Free Entry"
+      : `₹${place.entrance_fee_in_inr}`;
+
+  const timeLabel = place.time_needed_to_visit_in_hrs
+    ? `${place.time_needed_to_visit_in_hrs} hrs`
+    : "N/A";
+
+  const featuresArray =
+    typeof place.features === "string" ? place.features.split(" ") : [];
+
   const navigate = useNavigate();
 
-  const primaryStay = destination.stayOptions?.[0];
-
-  const avgPrice = destination.price || null;
-
-  const tagsArray = Array.isArray(destination.tags)
-    ? destination.tags
-    : typeof destination.tags === "string"
-    ? destination.tags
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean)
-    : [];
-
-  // Fallback for nights if not provided
-  const nights =
-    destination.suggestedNights ||
-    destination.nights || // in case backend adds this later
-    2; // default
-
-  const totalApprox = avgPrice && nights ? avgPrice * nights : null;
-
-  const handleViewDetails = () => {
-    navigate(`/trip/${destination.id.timestamp}`);
-  };
-
   return (
-    <Card className="w-full">
-      <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
-        {/* Left gradient thumbnail area */}
-        <div
-          className={`relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-sky-500/80 via-emerald-500/80 to-slate-800/80 p-4 text-white md:max-w-[260px]`}
-        >
+    <Card
+      onClick={() => navigate(`/trip-details/`, { state: { place } })}
+      className="w-full"
+    >
+      <div className="flex flex-col gap-3 md:flex-row">
+        {/* LEFT */}
+        <div className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-[#F4A261] to-[#C9622A] p-4 text-white md:max-w-[260px]">
           <div>
-            <p className="text-[0.7rem] uppercase tracking-[0.18em] text-slate-100/80">
-              {destination.cityName} · India
+            <p className="text-[0.7rem] uppercase tracking-wider text-white/80">
+              {place.city}, {place.state}
             </p>
             <h3 className="mt-1 text-base font-semibold md:text-lg">
-              {destination.name}
+              {place.name}
             </h3>
+            <p className="text-[0.7rem] text-white/80">
+              {place.type} • {place.significance}
+            </p>
           </div>
 
-          <div className="mt-3 flex items-center justify-between text-[0.8rem] text-slate-100">
-            <RatingStars rating="4.5" size="xs" showValue={false} />
-
-            {avgPrice && (
-              <span>
-                From ₹{avgPrice.toLocaleString("en-IN")}{" "}
-                <span className="text-[0.7rem]">
-                  {/* change the label as per your meaning */}/ person
-                </span>
-              </span>
-            )}
+          <div className="mt-3 flex items-center justify-between text-sm">
+            <RatingStars rating={rating} size="xs" showValue={false} />
+            <span>{feeLabel}</span>
           </div>
 
-          <div className="pointer-events-none absolute -right-8 -top-8 h-16 w-16 rounded-full border border-white/35 bg-white/25 blur-xl" />
+          <div className="pointer-events-none absolute -right-8 -top-8 h-16 w-16 rounded-full border border-white/30 bg-white/20 blur-xl" />
         </div>
 
-        {/* Right details */}
+        {/* RIGHT */}
         <div className="flex flex-[2] flex-col gap-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap gap-1.5 text-[0.7rem]">
-              {tagsArray.slice(0, 4).map((tag) => (
-                <Pill
-                  key={tag}
-                  variant="subtle"
-                  className="px-2 py-0.5 text-[0.7rem]"
-                >
-                  {tag}
-                </Pill>
-              ))}
-            </div>
-
-            {totalApprox && (
-              <Pill variant="highlight" className="text-[0.7rem]">
-                {nights} nights · from approx ₹
-                {totalApprox.toLocaleString("en-IN")}
-              </Pill>
-            )}
+          {/* TAGS */}
+          <div className="flex flex-wrap gap-1.5 text-[0.7rem]">
+            <Pill variant="subtle">Zone: {place.zone}</Pill>
+            <Pill variant="subtle">
+              Established: {place.establishment_year}
+            </Pill>
           </div>
 
-          {/* Highlights already matches your API shape */}
-          <HighlightsList items={destination.highlights} />
+          {/* FEATURES */}
+          <div className="flex flex-wrap gap-1.5">
+            {featuresArray.map((f, i) => (
+              <Pill
+                key={i}
+                variant="subtle"
+                className="text-[0.7rem] px-2 py-0.5"
+              >
+                {f}
+              </Pill>
+            ))}
+          </div>
 
-          {/* This will simply not render for now since stayOptions is absent */}
-          {primaryStay && <StayOptionItem stay={primaryStay} />}
-
-          <div className="mt-1 flex flex-wrap items-center justify-between gap-2 text-[0.75rem] text-slate-600 dark:text-slate-300">
+          {/* DETAILS */}
+          <div className="grid grid-cols-2 gap-2 text-[0.75rem] text-[#777]">
             <span>
-              Best season:{" "}
-              <span className="font-medium">{destination.bestSeason}</span>
+              ⏱ Time Needed: <b>{timeLabel}</b>
+            </span>
+            <span>
+              🌇 Best Time: <b>{place.best_time_to_visit}</b>
+            </span>
+            <span>
+              📅 Weekly Off: <b>{place.weekly_off}</b>
+            </span>
+            <span>
+              📷 DSLR: <b>{place.dslr_allowed}</b>
+            </span>
+            <span>
+              ✈ Airport Nearby: <b>{place.airport_with_50km_radius}</b>
+            </span>
+            <span>
+              ⭐ Reviews: <b>{place.number_of_google_review_in_lakhs}L</b>
+            </span>
+          </div>
+
+          {/* FOOTER */}
+          <div className="flex justify-between items-center text-[0.75rem]">
+            <span className="text-[#777]">
+              Rating: {place.google_review_rating}
             </span>
 
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="rounded-full border border-slate-300 px-3 py-1 text-[0.75rem] hover:border-emerald-400 hover:text-emerald-500 dark:border-slate-700 dark:hover:border-emerald-400"
-              >
-                Save trip
-              </button>
-              <button
-                type="button"
-                onClick={handleViewDetails}
-                className="rounded-full bg-slate-900 px-3 py-1 text-[0.75rem] font-medium text-slate-50 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-              >
-                View details
-              </button>
-            </div>
+            <button
+              onClick={() => navigate(`/trip-details/`, { state: { place } })}
+              className="rounded-xl bg-[#F4A261] px-3 py-1 text-xs text-white shadow-[0_4px_14px_rgba(244,162,97,0.4)] transition-all duration-200 hover:bg-[#e8903e] hover:-translate-y-[1px]"
+            >
+              View details
+            </button>
           </div>
         </div>
       </div>

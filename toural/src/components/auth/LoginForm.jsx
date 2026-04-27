@@ -3,8 +3,10 @@ import TextInput from "../ui/TextInput";
 import PasswordInput from "../ui/PasswordInput";
 import Button from "../ui/Button";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [form, setForm] = useState({ email: "", password: "", remember: true });
   const [errors, setErrors] = useState({});
@@ -31,14 +33,13 @@ export default function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!validate()) return;
-    const success = await login(form.email, form.password);
+    const success = await login(form);
     if (success.status == 200) {
       navigate("/");
     } else {
       alert("Invalid credentials, please try again.");
     }
-    console.log("Logging in with", form);
-    alert("Logged in (mock). Integrate API later.");
+    console.log("Logging in successfully with:", form.email);
   }
 
   return (
@@ -67,20 +68,20 @@ export default function LoginForm() {
         error={errors.password}
       />
 
-      <div className="flex items-center justify-between pt-1 text-[0.75rem] text-slate-600 dark:text-slate-400">
+      <div className="flex items-center justify-between pt-1 text-[0.75rem] text-[#777]">
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
             name="remember"
             checked={form.remember}
             onChange={handleChange}
-            className="h-3.5 w-3.5 rounded border-slate-300 text-emerald-500 focus:ring-emerald-400 dark:border-slate-600 dark:bg-slate-900"
+            className="h-3.5 w-3.5 rounded border-[#F4A261]/40 text-[#F4A261] focus:ring-[#F4A261]/40"
           />
           <span>Remember me</span>
         </label>
         <button
           type="button"
-          className="text-[0.75rem] text-emerald-600 underline-offset-2 hover:underline dark:text-emerald-300"
+          className="text-[0.75rem] text-[#C9622A] underline-offset-2 hover:underline"
         >
           Forgot password?
         </button>
