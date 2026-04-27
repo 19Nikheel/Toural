@@ -31,26 +31,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf->csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource())).authorizeHttpRequests(auth->auth.requestMatchers("/").authenticated()
-                        .anyRequest().authenticated()).exceptionHandling(ex->ex.authenticationEntryPoint(point))
+        http.csrf(csrf->csrf.disable())
+                .authorizeHttpRequests(auth->auth
+                        .requestMatchers("/").authenticated()
+                        .anyRequest().authenticated())
+                .exceptionHandling(ex->ex.authenticationEntryPoint(point))
                 .sessionManagement(ses->ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOriginPattern("*"); // allow all origins
-        configuration.addAllowedMethod("*");        // allow all HTTP methods
-        configuration.addAllowedHeader("*");        // allow all headers
-        configuration.setAllowCredentials(false);   // must be false when using "*"
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
     }
 
     @Bean

@@ -40,7 +40,6 @@ public class HotelRecommendationService {
         if (hotelRecommendationDtos == null) {
             return null;
         }
-        System.out.println("hotelRecommendationDtos: " + hotelRecommendationDtos.size());
         List<Hotel> hotels = new ArrayList<>();
         for (var i : hotelRecommendationDtos) {
             Hotel byHotelId = hotelService.findByHotelId(i.getHotelId());

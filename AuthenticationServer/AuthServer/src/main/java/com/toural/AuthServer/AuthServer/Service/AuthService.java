@@ -35,7 +35,6 @@ public class AuthService {
         if (save != null) {
             PostSign ps=new PostSign(save.getUserId(), user.getName(), user.getEmail(), user.getPhoneNo(), save.getRole());
             boolean result = sendService.sendToB(finalToken, ps);
-            System.out.println("result "+ result);
             if (result) {
                 return true;
             }

@@ -69,14 +69,10 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         String username = authentication.getName();
-        System.out.println("Username: "+username);
         Optional<BaseUser> byId = baseUserService.findById(Long.parseLong(username));
-        System.out.println("byId: "+byId.get());
         String type=byId.get().getType();
         // testing user fetched
         BaseUser user = byId.get();
-        System.out.println(user.getUserId() +" "+user.getEmail()+" "+user.getPhoneNo()+" "+ user.getName()+" "+user.getType());
-
         if(type.toLowerCase().equals("user")){
             try{
                 UserProfile userProfile = userProfileRepository.findById(new UserProfileId(EmailBucket

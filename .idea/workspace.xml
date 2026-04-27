@@ -7,43 +7,17 @@
     <list default="true" id="061dddd2-b3d0-4cbf-8060-3f9cc501ccef" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/APIGateway/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/CustomUserDetailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/JwtResponce.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/JwtResponce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/SignupPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/SignupPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/postSign.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/DTO/PostSign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Entity/AuthUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Entity/AuthUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/JwtHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/SendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/SendService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/external_Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/external_Services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookingService/BookingService/src/main/java/com/toural/BookingService/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookingService/BookingService/src/main/java/com/toural/BookingService/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookingService/BookingService/src/main/java/com/toural/BookingService/services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookingService/BookingService/src/main/java/com/toural/BookingService/services/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationServer/AuthServer/src/main/java/com/toural/AuthServer/AuthServer/Service/AuthService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HotelService/HotelService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/config/WebClientConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/HotelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/TourController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/entities/Tour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/HotelRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/HotelRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/TourRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/repos/TourRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/TourService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/TourService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/CustomUserDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/CustomUserDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/controllers/RecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelRecommendationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/HotelService/HotelService/src/main/java/com/toural/HotelService/services/HotelRecommendationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Recommendation_system/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Recommendation_system/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/DTO/SignupPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/DTO/SignupPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/DTO/profileDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/DTO/ProfileDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Models/BaseUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Models/BaseUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/Toural/UserService/Service/JwtHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,27 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.AuthServerApplication.executor": "Run",
-    "Spring Boot.BookingServiceApplication.executor": "Run",
-    "Spring Boot.HotelServiceApplication.executor": "Run",
-    "Spring Boot.ServiceRegistryApplication.executor": "Run",
-    "Spring Boot.UserServiceApplication.executor": "Run",
-    "git-widget-placeholder": "staging",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AuthServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.BookingServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.HotelServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ServiceRegistryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;staging&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.APIGateway.APIGateway" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.UserServiceApplication">
+  <component name="RunManager" selected="Spring Boot.HotelServiceApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
       <module name="APIGateway" />
@@ -164,11 +138,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.UserServiceApplication" />
-        <item itemvalue="Spring Boot.AuthServerApplication" />
+        <item itemvalue="Spring Boot.HotelServiceApplication" />
         <item itemvalue="Spring Boot.ApiGatewayApplication" />
         <item itemvalue="Spring Boot.ServiceRegistryApplication" />
-        <item itemvalue="Spring Boot.HotelServiceApplication" />
+        <item itemvalue="Spring Boot.AuthServerApplication" />
+        <item itemvalue="Spring Boot.UserServiceApplication" />
       </list>
     </recent_temporary>
   </component>
