@@ -1,12 +1,9 @@
 package com.toural.AuthServer.AuthServer.Service;
 
-import com.toural.AuthServer.AuthServer.DTO.SignupPacket;
-import com.toural.AuthServer.AuthServer.DTO.postSign;
+import com.toural.AuthServer.AuthServer.DTO.PostSign;
 import com.toural.AuthServer.AuthServer.external_Services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class SendService {
@@ -17,8 +14,8 @@ public class SendService {
         this.bClient = bClient;
     }
 
-    public boolean sendToB(postSign payload) {
-        ResponseEntity<Boolean> resp = bClient.sendItem(payload);
+    public boolean sendToB(String jwtToken,PostSign payload) {
+        ResponseEntity<Boolean> resp = bClient.sendItem(jwtToken,payload);
         return resp.getBody();
     }
 

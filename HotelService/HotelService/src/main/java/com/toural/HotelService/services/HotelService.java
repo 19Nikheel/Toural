@@ -55,4 +55,8 @@ public class HotelService {
         }
         return null;
     }
+
+    public List<Hotel> findByCityName(String cityName) {
+        return hotelRepo.findByCityNameContainingIgnoreCase(cityName);
+    }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TourRepo extends MongoRepository<Tour, ObjectId> {
-    List<Tour> findByCity(String city);
+    List<Tour> findByCityIgnoreCase(String city);
     List<Tour> findByCityContainingIgnoreCase(String let);
+    List<Tour> findTop2ByOrderByScoreDesc();
 }

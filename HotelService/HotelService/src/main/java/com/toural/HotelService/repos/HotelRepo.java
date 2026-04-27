@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface HotelRepo extends MongoRepository<Hotel, ObjectId> {
     List<Hotel> findByCityCode(String cityCode);
     Optional<Hotel> findByHotelId(String hotelId);
+    List<Hotel> findByCityNameContainingIgnoreCase(String cityName);
 }

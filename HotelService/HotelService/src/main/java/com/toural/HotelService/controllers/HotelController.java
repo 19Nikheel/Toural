@@ -25,7 +25,6 @@ public class HotelController {
 
     @Autowired
     private HotelRepo hotelRepo;
-
     @Autowired
     private CityRepo cityRepo;
     @Autowired
@@ -52,6 +51,14 @@ public class HotelController {
     @GetMapping("hotel-by-city-code/{cityCode}")
     public ResponseEntity<List<Hotel>> findHotelByCityCode(@PathVariable String cityCode){
         List<Hotel> hotels = hotelService.findByCityCode(cityCode);
+        if (hotels!=null && !hotels.isEmpty()){
+            return ResponseEntity.ok(hotels);
+        }
+        return ResponseEntity.noContent().build();
+    }
+    @GetMapping("hotel-by-city/{city}")
+    public ResponseEntity<List<Hotel>> findHotelByCity(@PathVariable String city){
+        List<Hotel> hotels = hotelService.findByCityName(city);
         if (hotels!=null && !hotels.isEmpty()){
             return ResponseEntity.ok(hotels);
         }

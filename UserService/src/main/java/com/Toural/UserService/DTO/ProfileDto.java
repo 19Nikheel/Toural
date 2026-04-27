@@ -7,10 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignupPacket {
-    private String userId;
-    private String name;
-    private String email;
-    private String phoneNo;
-    private String type;
+public class ProfileDto {
+    String userId;
+    String name;
+    String email;
+    String phoneNo;
+    String type;
+    String dob;
+    String address;
+    String pic;
 }

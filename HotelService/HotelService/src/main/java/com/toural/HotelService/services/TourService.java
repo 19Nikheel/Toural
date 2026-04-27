@@ -1,7 +1,5 @@
 package com.toural.HotelService.services;
 
-import com.toural.HotelService.entities.City;
-import com.toural.HotelService.entities.Hotel;
 import com.toural.HotelService.entities.Tour;
 import com.toural.HotelService.repos.HotelRepo;
 import com.toural.HotelService.repos.TourRepo;
@@ -9,7 +7,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,15 +55,21 @@ public class TourService {
         return null;
     }
 
-    public List<Tour> findByCityCode(String city) {
-        return tourRepo.findByCity(city);
+    public List<Tour> findByCity(String city) {
+        return tourRepo.findByCityContainingIgnoreCase(city);
     }
 
     public Tour findById(ObjectId id) {
         return tourRepo.findById(id).get();
     }
-
+    public List<Tour> getPlacesByCity(String city) {
+        return tourRepo.findByCityIgnoreCase(city);
+    }
     public List<Tour> findByCityContainingIgnoreCase(String let) {
         return tourRepo.findByCityContainingIgnoreCase(let);
+    }
+
+    public List<Tour> getTop5Places() {
+        return tourRepo.findTop2ByOrderByScoreDesc();
     }
 }

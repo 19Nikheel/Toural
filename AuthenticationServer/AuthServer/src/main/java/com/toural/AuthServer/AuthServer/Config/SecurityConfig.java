@@ -27,15 +27,19 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationEntryPoint point;
 
-
-
     @Autowired
     private JwtAuthenticationFilter filter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> {
+                    try {
+                        csrf.disable().cors(cors-> corsConfigurationSource());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
                  // <- use withDefaults so Spring Security picks up your CorsConfigurationSource bean
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/signup").permitAll() // allow anonymous access to auth endpoints
@@ -46,24 +50,23 @@ public class SecurityConfig {
                 .sessionManagement(ses -> ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//
-//        configuration.addAllowedOriginPattern("*"); // allow all origins
-//        configuration.addAllowedMethod("*");        // allow all HTTP methods
-//        configuration.addAllowedHeader("*");        // allow all headers
-//        configuration.setAllowCredentials(false);   // must be false when using "*"
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//
-//        return source;
-//    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOriginPattern("*"); // allow all origins
+        configuration.addAllowedMethod("*");        // allow all HTTP methods
+        configuration.addAllowedHeader("*");        // allow all headers
+        configuration.setAllowCredentials(false);   // must be false when using "*"
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
 
 
     @Bean

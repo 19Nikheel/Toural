@@ -15,6 +15,11 @@ public class TourController {
     @Autowired
     private TourService tourService;
 
+    @GetMapping("/top")
+    public List<Tour> getTopPlaces() {
+        return tourService.getTop5Places();
+    }
+
     @GetMapping("/city-let/{let}")
     public ResponseEntity<?> findCities(@PathVariable String let){
         List<Tour> tours = tourService.findByCityContainingIgnoreCase(let);
@@ -23,8 +28,6 @@ public class TourController {
         }
         return ResponseEntity.noContent().build();
     }
-
-
 
     @GetMapping
     public ResponseEntity<List<Tour>> findAll() {
@@ -44,9 +47,9 @@ public class TourController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("/city-code/{cityCode}")
-    public ResponseEntity<List<Tour>> findAll(@PathVariable String cityCode) {
-        List<Tour> tours  = tourService.findByCityCode(cityCode);
+    @GetMapping("/city/{city}")
+    public ResponseEntity<List<Tour>> findAll(@PathVariable String city) {
+        List<Tour> tours  = tourService.findByCityContainingIgnoreCase(city);
         if(tours!=null && tours.size()>0) {
             return ResponseEntity.ok().body(tours);
         }
