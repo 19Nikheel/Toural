@@ -284,15 +284,15 @@ def api_place_state(place_name: str, top_n: int = 5):
     return recommend_place_in_state(place_name, top_n)
 
 
-# # Register with Eureka
-# @app.on_event("startup")
-# async def startup():
-#     await eureka_client.init_async(
-#         eureka_server="http://localhost:8761/eureka",
-#         app_name="fastapi-service",
-#         instance_port=8000,
-#     )
+# Register with Eureka
+@app.on_event("startup")
+async def startup():
+    await eureka_client.init_async(
+        eureka_server="http://localhost:8761/eureka",
+        app_name="fastapi-service",
+        instance_port=8000,
+    )
 
-# @app.on_event("shutdown")
-# async def shutdown():
-#     await eureka_client.stop_async()
+@app.on_event("shutdown")
+async def shutdown():
+    await eureka_client.stop_async()

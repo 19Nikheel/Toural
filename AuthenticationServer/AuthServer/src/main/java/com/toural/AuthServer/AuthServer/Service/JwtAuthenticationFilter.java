@@ -1,6 +1,5 @@
 package com.toural.AuthServer.AuthServer.Service;
 
-
 import com.toural.AuthServer.AuthServer.Config.CustomUserDetailService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -75,21 +74,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
-        if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails user=this.userDetailsService.loadUserByUsername(username);
-
-            boolean validatetoken=this.jwthelper.validateToken(token,user);
-
-            if(validatetoken){
-                UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }else{
-                logger.info("Token validation failed.");
-                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid  token.");
-
-            }
-        }
+//        if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
+////            UserDetails user=this.userDetailsService.loadUserByUsername(username);
+//
+//            boolean validatetoken=this.jwthelper.validateToken(token);//,user
+//
+//            if(validatetoken){
+//                UsernamePasswordAuthenticationToken authentication=new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
+//                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//                SecurityContextHolder.getContext().setAuthentication(authentication);
+//            }else{
+//                logger.info("Token validation failed.");
+//                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid  token.");
+//
+//            }
+//        }
         filterChain.doFilter(request,response);
     }
 }

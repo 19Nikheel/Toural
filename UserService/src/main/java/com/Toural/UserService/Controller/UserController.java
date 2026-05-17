@@ -4,15 +4,13 @@ package com.Toural.UserService.Controller;
 import com.Toural.UserService.DTO.*;
 import com.Toural.UserService.Models.*;
 import com.Toural.UserService.Repo.*;
+import com.Toural.UserService.Service.BaseUserService;
 import com.Toural.UserService.Util.EmailBucket;
-import com.sun.net.httpserver.Authenticator;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.SecurityContext;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -24,7 +22,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private BaseUserRepository baseUserRepository;
+    private BaseUserService baseUserService;
 
     @Autowired
     private DriverRepository driverRepository;
@@ -39,67 +37,49 @@ public class UserController {
     private UserProfileRepository userProfileRepository;
 
 
-    @PostMapping("/add")
+    @PostMapping("/add-user")
     public ResponseEntity<Boolean> addPost(@RequestBody SignupPacket signupPacket){
         try {
-            BaseUser b1 = new BaseUser();
-            b1.setName(signupPacket.getName());
-            b1.setEmail(signupPacket.getEmail());
-            b1.setPhoneNo(signupPacket.getPhoneNo());
-            b1.setType(signupPacket.getType());
-            BaseUser save = baseUserRepository.save(b1);
-
-            return  ResponseEntity.ok().body(true);
+            if (signupPacket!=null){
+                Boolean b = baseUserService.saveBaseUser(signupPacket);
+                return  ResponseEntity.ok().body(b);
+            }
         }catch (Exception e){
             return  ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body(false);
         }
-
+        return  ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body(false);
     }
 
 
     @GetMapping("/authid/{id}")
     public ResponseEntity<Boolean> checkId (@PathVariable("id") long id){
-
-        boolean b = baseUserRepository.existsById(id);
-
+        boolean b = baseUserService.existsById(id);
         return ResponseEntity.ok().body(b);
     }
 
     @GetMapping("/getid/{email}")
     public ResponseEntity<String> getId (@PathVariable("email") String email ){
-        BaseUser bu= baseUserRepository.findByEmail(email);
-
+        BaseUser bu= baseUserService.findByEmail(email);
         return ResponseEntity.ok().body(bu.getUserId().toString());
     }
 
     @GetMapping("/profile")
     public ResponseEntity<?> getProfile (){
 
-        Object principal = SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        String username;
-
-        if (principal instanceof UserDetails userDetails) {
-            username = userDetails.getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-
-        //Optional<BaseUser> user = baseUserRepository.findByUsername(username);
-        Optional<BaseUser> byId = baseUserRepository.findById(Long.parseLong(username));
+        String username = authentication.getName();
+        Optional<BaseUser> byId = baseUserService.findById(Long.parseLong(username));
         String type=byId.get().getType();
-
-
-
-        if(type.toLowerCase().equals("customer")){
+        // testing user fetched
+        BaseUser user = byId.get();
+        if(type.toLowerCase().equals("user")){
             try{
                 UserProfile userProfile = userProfileRepository.findById(new UserProfileId(EmailBucket
                         .bucketFor(byId.get().getEmail(), 16), byId.get().getUserId())).get();
 
-                profileDto profileDto = new profileDto();
+                ProfileDto profileDto = new ProfileDto();
+                profileDto.setUserId(String.valueOf(user.getUserId()));
                 profileDto.setAddress(userProfile.getAddress());
                 profileDto.setDob(userProfile.getDob().toString());
                 profileDto.setEmail(byId.get().getEmail());
@@ -110,7 +90,8 @@ public class UserController {
 
                 return ResponseEntity.status(HttpStatus.SC_ACCEPTED).body(profileDto);
             }catch (Exception w){
-                profileDto profileDto = new profileDto();
+                ProfileDto profileDto = new ProfileDto();
+                profileDto.setUserId(String.valueOf(user.getUserId()));
                 profileDto.setAddress("NA");
                 profileDto.setDob("NA");
                 profileDto.setEmail(byId.get().getEmail());
@@ -120,15 +101,7 @@ public class UserController {
                 profileDto.setPic("NA");
 
                 return ResponseEntity.status(HttpStatus.SC_ACCEPTED).body(profileDto);
-
-
             }
-
-
-
-
-
-
         } else if (type.toLowerCase().equals("hotel")) {
             try {
                 HotelManager userProfile = hotelManagerRepository.findById(new UserProfileId(EmailBucket
@@ -236,11 +209,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.SC_ACCEPTED).body(dp);
 
             }
-
-
-
         }
-
         return ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body("NOT Found");
     }
 }

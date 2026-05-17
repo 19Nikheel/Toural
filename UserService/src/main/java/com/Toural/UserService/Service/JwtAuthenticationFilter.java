@@ -21,6 +21,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -28,26 +29,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtHelper jwthelper;
-
-    @Autowired
-    private CustomUserDetailService userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
 
 
         // Skip JWT validation for /signup
-        AntPathMatcher matcher = new AntPathMatcher();
-        String path = request.getRequestURI();
-
-        if (
-                        matcher.match("/user/add", path) ||
-                        matcher.match("/user/authid/*", path) ||
-                        matcher.match("/user/getid/*", path)
-        ) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+//        AntPathMatcher matcher = new AntPathMatcher();
+//        String path = request.getRequestURI();
+//
+//        if (
+//                        matcher.match("/user/add", path) ||
+//                        matcher.match("/user/authid/*", path) ||
+//                        matcher.match("/user/getid/*", path)
+//        ) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
 
 
@@ -59,6 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(header!=null && header.startsWith("Bearer")){
 
             token=header.substring(7);
+            System.out.println(token);
             try {
                 username = this.jwthelper.getUsernameFromToken(token);
             } catch (IllegalArgumentException e) {
@@ -91,6 +90,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String userName=this.jwthelper.getUsernameFromToken(token);
 
             String role= (String)this.jwthelper.getAllClaimsFromToken(token).get("role");
+            System.out.println("Role: "+role);
             UserDetails user= User.withUsername(userName)
                     .password("ioi")
                     .roles(role)

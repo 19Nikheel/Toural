@@ -9,6 +9,8 @@ spring:
           uri: lb://USERSERVICE
           predicates:
             - Path=/user/**
+          filter:
+            - AuthenticationFilter
 
         - id: RATINGSERVICE
           uri: lb://RATINGSERVICE
@@ -18,7 +20,7 @@ spring:
         - id: HOTEL-SERVICE
           uri: lb://HOTEL-SERVICE
           predicates:
-            - Path=/hotels/**,/city/**,/tours/**,/state/**
+            - Path=/hotels/**,/city/**,/tours/**,/state/**,/api/recommend
 
         - id: AUTHSERVER
           uri: lb://AUTHSERVER
@@ -33,6 +35,10 @@ spring:
             allowCredentials: true
             maxAge: 3600
 
+
+jwt:
+  secret:
+    key: afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf
 
 
 server:

@@ -18,10 +18,7 @@ import java.time.OffsetDateTime;
 public class BaseUser {
 
     public static final int PARTITIONS = 16;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @SequenceGenerator(name = "user_seq_gen", sequenceName = "user_seq", allocationSize = 50)
     @Column(name = "user_id")
     private Long userId;
 

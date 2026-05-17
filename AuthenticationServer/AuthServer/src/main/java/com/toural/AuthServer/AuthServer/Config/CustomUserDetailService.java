@@ -24,24 +24,14 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println();
-        System.out.println(username);
-        System.out.println();
+
         Optional<AuthUser> byUsername = authUserRepo.findByUsername(username);
-
-        System.out.println();
-        System.out.println(byUsername.get().getUsername());
-        System.out.println(byUsername.get().getPassword());
-        System.out.println(byUsername.get().getRole());
-        System.out.println();
-
-
 
         if(byUsername.isEmpty()){
             throw new UsernameNotFoundException("user not found");
         }
 
-        return User.withUsername(byUsername.get().getUsername())
+        return User.withUsername(byUsername.get().getUserId().toString())
                 .password(byUsername.get().getPassword())
                 .roles(byUsername.get().getRole())
                 .build();

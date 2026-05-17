@@ -26,38 +26,20 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationEntryPoint point;
 
-
-
     @Autowired
     private JwtAuthenticationFilter filter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf->csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource())).authorizeHttpRequests(auth->auth.requestMatchers("/").authenticated()
-                        .requestMatchers("/user/authid/**","/user/getid/**","/user/add/**")
-                        .permitAll()
-                        .anyRequest().authenticated()).exceptionHandling(ex->ex.authenticationEntryPoint(point))
+        http.csrf(csrf->csrf.disable())
+                .authorizeHttpRequests(auth->auth
+                        .requestMatchers("/").authenticated()
+                        .anyRequest().authenticated())
+                .exceptionHandling(ex->ex.authenticationEntryPoint(point))
                 .sessionManagement(ses->ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOriginPattern("*"); // allow all origins
-        configuration.addAllowedMethod("*");        // allow all HTTP methods
-        configuration.addAllowedHeader("*");        // allow all headers
-        configuration.setAllowCredentials(false);   // must be false when using "*"
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
-    }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

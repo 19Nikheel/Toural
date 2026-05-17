@@ -4,7 +4,7 @@ spring:
   datasource:
     name: AuthenticationServer
     username: postgres
-    password: "Nik@9905366469"
+    password: password
     url: jdbc:postgresql://localhost:5432/AuthenticationServer
     driver-class-name: org.postgresql.Driver
 
@@ -24,6 +24,10 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+jwt:
+  secret:
+    key: afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf
 
 server:
   port: 9000
