@@ -6,11 +6,11 @@ public class HotelManagerProfile {
     private String email;
     private String phoneNo;
     private String type;
-    private int managedHotelId;
+    private String managedHotelId;
 
     private String phoneOffice;
 
-    public HotelManagerProfile(String email, String phoneNo, String type, int managedHotelId, String phoneOffice) {
+    public HotelManagerProfile(String email, String phoneNo, String type, String managedHotelId, String phoneOffice) {
         this.email = email;
         this.phoneNo = phoneNo;
         this.type = type;
@@ -45,11 +45,11 @@ public class HotelManagerProfile {
         this.type = type;
     }
 
-    public int getManagedHotelId() {
+    public String getManagedHotelId() {
         return managedHotelId;
     }
 
-    public void setManagedHotelId(int managedHotelId) {
+    public void setManagedHotelId(String managedHotelId) {
         this.managedHotelId = managedHotelId;
     }
 

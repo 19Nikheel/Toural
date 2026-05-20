@@ -5,6 +5,7 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.toural.BookingService.dtos.BookingDto;
 import com.toural.BookingService.services.PaymentService;
+import com.toural.BookingService.services.BookingService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private BookingService bookingService;
     @Value("${razorpay.api.secret}")
     private String secret;
     @Value("${razorpay.api.key}")
@@ -58,27 +61,25 @@ public class PaymentController {
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> data) {
-        Map<String, String> res = new HashMap<>();
-        res.put("status", "success");
-//
-//        String orderId = data.get("razorpay_order_id");
-//        String paymentId = data.get("razorpay_payment_id");
-//        String signature = data.get("razorpay_signature");
-//
-//        try {
-//            String payload = orderId + "|" + paymentId;
-//
-//            String generatedSignature = hmacSHA256(payload, secret);
+        String orderId = data.get("razorpay_order_id");
+        String paymentId = data.get("razorpay_payment_id");
+        String signature = data.get("razorpay_signature");
 
-//            if (generatedSignature.equals(signature)) {
+        try {
+            String payload = orderId + "|" + paymentId;
+            String generatedSignature = hmacSHA256(payload, secret);
+
+            if (generatedSignature.equals(signature)) {
+                bookingService.completeBookingPayment(orderId, paymentId);
+                Map<String, String> res = new HashMap<>();
+                res.put("status", "success");
                 return ResponseEntity.ok(res);
-//            } else {
-//                return ResponseEntity.status(400).body("Invalid signature");
-//            }
-//
-//        } catch (Exception e) {
-//            return ResponseEntity.status(500).body("Error verifying payment");
-//        }
+            } else {
+                return ResponseEntity.status(400).body("Invalid signature");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error verifying payment");
+        }
     }
     public static String hmacSHA256(String data, String key) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "HmacSHA256");

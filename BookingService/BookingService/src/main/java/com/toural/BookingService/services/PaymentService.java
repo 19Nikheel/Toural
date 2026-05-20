@@ -13,12 +13,12 @@ public class PaymentService {
     private String apiKey;
     @Value("${razorpay.api.secret}")
     private String apiSecret;
-    public Order payment(int amount,String userId) throws RazorpayException {
+    public Order payment(double amount, Long bookingId) throws RazorpayException {
         RazorpayClient razorpay = new RazorpayClient(apiKey, apiSecret);
         JSONObject body = new JSONObject();
-        body.put("amount", amount);
+        body.put("amount", (int)(amount * 100));
         body.put("currency", "INR");
-        body.put("receipt", userId);
+        body.put("receipt", "txn_" + bookingId);
         Order order = razorpay.orders.create(body);
         return order;
     }

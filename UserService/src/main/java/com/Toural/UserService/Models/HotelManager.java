@@ -23,8 +23,8 @@ public class HotelManager {
 
 
     // store JSON as String (or use AttributeConverter / hibernate-types for List<Map<String,Object>>)
-    @Column(name = "managed_hotel_id", nullable = false)
-    private int managedHotelId;
+    @Column(name = "managed_hotel_id", nullable = true)
+    private String managedHotelId;
 
     @Column(name = "phone_office", nullable = false)
     private String phoneOffice;

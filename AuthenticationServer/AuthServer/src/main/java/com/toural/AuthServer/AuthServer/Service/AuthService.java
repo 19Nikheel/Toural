@@ -25,6 +25,18 @@ public class AuthService {
 
     @Transactional
     public Boolean saveUser(SignupPacket user){
+        if (user.getType() != null && (user.getType().equalsIgnoreCase("driver") || user.getType().equalsIgnoreCase("car_manager"))) {
+            throw new RuntimeException("Public signup for car managers is not allowed");
+        }
+        return saveUserInternal(user);
+    }
+
+    @Transactional
+    public Boolean saveAdminUser(SignupPacket user) {
+        return saveUserInternal(user);
+    }
+
+    private Boolean saveUserInternal(SignupPacket user) {
         AuthUser uload=new AuthUser();
         uload.setUsername(user.getEmail());
         uload.setRole(user.getType().toUpperCase());

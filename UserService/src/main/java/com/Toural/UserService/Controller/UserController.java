@@ -121,7 +121,7 @@ public class UserController {
                 hmp.setType(byId.get().getType());
                 hmp.setPhoneNo(byId.get().getPhoneNo());
                 hmp.setPhoneOffice("NA");
-                hmp.setManagedHotelId(-1);
+                hmp.setManagedHotelId("NA");
 
                 return ResponseEntity.status(HttpStatus.SC_ACCEPTED).body(hmp);
             }
@@ -211,5 +211,64 @@ public class UserController {
             }
         }
         return ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body("NOT Found");
+    }
+
+    @PutMapping("/hotel-manager/update")
+    public ResponseEntity<?> updateHotelManager(@RequestBody java.util.Map<String, String> payload) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Optional<BaseUser> byId = baseUserService.findById(Long.parseLong(username));
+        if (byId.isEmpty() || !byId.get().getType().equalsIgnoreCase("hotel")) {
+            return ResponseEntity.status(HttpStatus.SC_FORBIDDEN).body("Not a hotel manager");
+        }
+        BaseUser user = byId.get();
+        UserProfileId upId = new UserProfileId(EmailBucket.bucketFor(user.getEmail(), 16), user.getUserId());
+        HotelManager hm = hotelManagerRepository.findById(upId).orElse(new HotelManager(upId));
+        
+        if (hm.getOfficeAddress() == null) hm.setOfficeAddress("NA");
+        if (hm.getPhoneOffice() == null) hm.setPhoneOffice("NA");
+
+        if (payload.containsKey("managedHotelId")) {
+            hm.setManagedHotelId(payload.get("managedHotelId"));
+        }
+        if (payload.containsKey("phoneOffice")) {
+            hm.setPhoneOffice(payload.get("phoneOffice"));
+        }
+        if (payload.containsKey("officeAddress")) {
+            hm.setOfficeAddress(payload.get("officeAddress"));
+        }
+        hotelManagerRepository.save(hm);
+        return ResponseEntity.ok("Hotel Manager profile updated successfully");
+    }
+
+    @PutMapping("/tourist-guide/update")
+    public ResponseEntity<?> updateTouristGuide(@RequestBody java.util.Map<String, String> payload) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Optional<BaseUser> byId = baseUserService.findById(Long.parseLong(username));
+        if (byId.isEmpty() || !byId.get().getType().equalsIgnoreCase("tourist")) {
+            return ResponseEntity.status(HttpStatus.SC_FORBIDDEN).body("Not a tourist guide");
+        }
+        BaseUser user = byId.get();
+        UserProfileId upId = new UserProfileId(EmailBucket.bucketFor(user.getEmail(), 16), user.getUserId());
+        TouristGuide tg = touristGuideRepository.findById(upId).orElse(new TouristGuide(upId));
+
+        if (tg.getLocation() == null) tg.setLocation("NA");
+        if (tg.getAvailabilityJson() == null) tg.setAvailabilityJson("[]");
+
+        if (payload.containsKey("location")) {
+            tg.setLocation(payload.get("location"));
+        }
+        if (payload.containsKey("availabilityJson")) {
+            tg.setAvailabilityJson(payload.get("availabilityJson"));
+        }
+        if (payload.containsKey("bio")) {
+            tg.setBio(payload.get("bio"));
+        }
+        if (payload.containsKey("languagesJson")) {
+            tg.setLanguagesJson(payload.get("languagesJson"));
+        }
+        touristGuideRepository.save(tg);
+        return ResponseEntity.ok("Tourist Guide profile updated successfully");
     }
 }
