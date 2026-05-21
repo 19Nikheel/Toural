@@ -19,6 +19,9 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import HotelDetailsPage from "../pages/HotelDetailsPage";
 import AllPlacesPage from "../components/home/AllPlacesPage";
 import HotelsListPage from "../components/hotels/HotelsListPage";
+import PackagesPage from "../pages/PackagesPage";
+import GuidesPage from "../pages/GuidesPage";
+import CarsPage from "../pages/CarsPage";
 
 const MainLayout = ({ children }) => (
   <div className="min-h-screen bg-white text-[#1a1a1a] flex flex-col">
@@ -56,6 +59,30 @@ const AppRouter = () => (
       }
     />
     <Route
+      path="/guides"
+      element={
+        <MainLayout>
+          <GuidesPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/cars"
+      element={
+        <MainLayout>
+          <CarsPage />
+        </MainLayout>
+      }
+    />
+    <Route
+      path="/packages"
+      element={
+        <MainLayout>
+          <PackagesPage />
+        </MainLayout>
+      }
+    />
+    <Route
       path="/hotel"
       element={
         <MainLayout>
@@ -63,7 +90,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route
       path="/results"
       element={
@@ -88,7 +114,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route
       path="/trip/:id"
       element={
@@ -97,7 +122,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route
       path="/my-trips"
       element={
@@ -108,7 +132,6 @@ const AppRouter = () => (
         </ProtectedRoute>
       }
     />
-
     <Route
       path="/checkout"
       element={
@@ -119,7 +142,6 @@ const AppRouter = () => (
         </ProtectedRoute>
       }
     />
-
     <Route
       path="/payment-status"
       element={
@@ -130,7 +152,6 @@ const AppRouter = () => (
         </ProtectedRoute>
       }
     />
-
     <Route
       path="/hotels/:hotelId"
       element={
@@ -139,7 +160,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route
       path="/login"
       element={
@@ -148,7 +168,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route
       path="/signup"
       element={
@@ -157,7 +176,6 @@ const AppRouter = () => (
         </MainLayout>
       }
     />
-
     <Route path="*" element={<Navigate to="/" replace />} />
   </Routes>
 );

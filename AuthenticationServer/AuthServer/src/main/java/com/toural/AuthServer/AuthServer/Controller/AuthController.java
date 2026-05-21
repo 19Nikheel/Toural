@@ -38,7 +38,8 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody Request jwtRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
         if (authenticate.isAuthenticated()) {
-            String token = this.jwtHelper.generateToken(jwtRequest.getRole(), authenticate.getName());
+            String role = authenticate.getAuthorities().iterator().next().getAuthority().replace("ROLE_", "");
+            String token = this.jwtHelper.generateToken(role, authenticate.getName());
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
         return new ResponseEntity<>("Username or Password is wrong", HttpStatus.UNAUTHORIZED);

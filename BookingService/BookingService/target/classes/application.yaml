@@ -4,7 +4,7 @@ spring:
   datasource:
     name: booking_service
     username: postgres
-    password: password
+    password: Nik@9905366469
     url: jdbc:postgresql://localhost:5432/booking_service
     driver-class-name: org.postgresql.Driver
 
@@ -20,3 +20,16 @@ razorpay:
   api:
     key: rzp_test_SfQqx5y2AUfBbB
     secret: KG8oWAS129JIqs0bt8LjIHGu
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8096

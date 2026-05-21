@@ -82,6 +82,39 @@ public class TourController {
         return ResponseEntity.badRequest().build();
     }
 
+    @Autowired
+    private org.springframework.data.mongodb.core.MongoTemplate mongoTemplate;
 
+    @GetMapping("/filter")
+    public ResponseEntity<java.util.Map<String, Object>> filterTours(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "6") int limit
+    ) {
+        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
 
+        if (city != null && !city.trim().isEmpty()) {
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("city").regex(city.trim(), "i"));
+        }
+        
+        if (search != null && !search.trim().isEmpty()) {
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("name").regex(search.trim(), "i"));
+        }
+
+        long total = mongoTemplate.count(query, Tour.class);
+        int totalPages = (int) Math.ceil((double) total / limit);
+
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page - 1, limit);
+        query.with(pageable);
+
+        List<Tour> data = mongoTemplate.find(query, Tour.class);
+
+        java.util.Map<String, Object> response = new java.util.HashMap<>();
+        response.put("data", data);
+        response.put("totalPages", totalPages == 0 ? 1 : totalPages);
+        response.put("currentPage", page);
+
+        return ResponseEntity.ok(response);
+    }
 }

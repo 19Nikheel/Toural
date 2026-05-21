@@ -23,9 +23,7 @@ const UserProvider = ({ children }) => {
   const getUser = async () => {
     try {
       const token = localStorage.getItem("jwtToken");
-      const response = await axiosInstance.get("/user/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axiosInstance.get("/user/profile");
       if (response.status === 202) {
         setUser(response.data);
         return response;
@@ -45,11 +43,10 @@ const UserProvider = ({ children }) => {
   const updateUser = async (firstname, lastname) => {
     const token = getToken();
     try {
-      const response = await axiosInstance.put(
-        "/user",
-        { firstname, lastname },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      const response = await axiosInstance.put("/user", {
+        firstname,
+        lastname,
+      });
       if (response.status === 200) {
         setUser(response.data);
         localStorage.removeItem("jwtToken");
@@ -64,11 +61,10 @@ const UserProvider = ({ children }) => {
   const updateUsernamePassword = async (username, password) => {
     const token = getToken();
     try {
-      const response = await axiosInstance.put(
-        "/user",
-        { username, password },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      const response = await axiosInstance.put("/user", {
+        username,
+        password,
+      });
       if (response.status === 200) {
         setUser(response.data);
         return response;
@@ -82,9 +78,7 @@ const UserProvider = ({ children }) => {
   const deleteUser = async () => {
     const token = getToken();
     try {
-      const response = await axiosInstance.delete("/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axiosInstance.delete("/user");
       if (response.status === 200) {
         setUser(null);
       }
@@ -117,6 +111,7 @@ const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
+        isLoggedIn: userAuthenticated,
         getUser,
         updateUser,
         deleteUser,

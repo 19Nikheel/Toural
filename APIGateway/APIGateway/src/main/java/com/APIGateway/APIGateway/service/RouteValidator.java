@@ -12,5 +12,10 @@ public class RouteValidator {
             "/auth/login",
             "/auth/signup"
     );
+    public static final List<String> internalEndPoints = List.of(
+            "/user/add-user"
+    );
+
     public Predicate<ServerHttpRequest> isSecure = serverHttpRequest -> openApiEndPoints.stream().noneMatch(endPoint -> serverHttpRequest.getURI().getPath().contains(endPoint));
+    public Predicate<ServerHttpRequest> isInternal = serverHttpRequest -> internalEndPoints.stream().anyMatch(endPoint -> serverHttpRequest.getURI().getPath().contains(endPoint));
 }

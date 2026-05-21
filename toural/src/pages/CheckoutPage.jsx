@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { CheckoutLayout } from "../components/checkout/CheckoutLayout";
 import { TravellerDetailsForm } from "../components/checkout/TravellerDetailsForm";
 import { ContactDetailsForm } from "../components/checkout/ContactDetailsForm";
@@ -8,20 +8,46 @@ import { PaymentSummarySidebar } from "../components/checkout/PaymentSummarySide
 import { TermsConsentBox } from "../components/checkout/TermsConsentBox";
 import Button from "../components/ui/Button";
 import { useTour } from "../context/TourContext";
-import useRazorpay from "react-razorpay";
+import { useUser } from "../context/UserContext";
 import axiosInstance from "../context/axiosInstance";
 
 const CheckoutPage = () => {
   const { tours } = useTour();
-  const [Razorpay] = useRazorpay();
+  const { user } = useUser();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const tripId = searchParams.get("tripId");
+  const location = useLocation();
 
-  const destination = useMemo(
-    () => tours.map((d) => String(d.id) === String(tripId)) || featured[0],
-    [tripId]
-  );
+  const tripId = searchParams.get("tripId");
+  const hotelId = searchParams.get("hotelId");
+  const rawItemId = searchParams.get("itemId");
+  const type = searchParams.get("type") || "TOUR";
+
+  // Build destination info from location state or tour context
+  const destination = useMemo(() => {
+    if (type === "PACKAGE" && location.state?.packageData) {
+      return {
+        name: `Custom Package: ${location.state.packageData.cityName}`,
+        estimatedPerPerson: location.state.packagePrice || 0,
+        suggestedNights: 1,
+      };
+    }
+    if (type === "HOTEL" && location.state?.hotel) {
+      const h = location.state.hotel;
+      return {
+        name: h.hotelName,
+        estimatedPerPerson: h.price || 1500,
+        suggestedNights: 1,
+      };
+    }
+    return (
+      tours.find((d) => String(d.id) === String(tripId)) || {
+        name: "Unknown",
+        estimatedPerPerson: 1500,
+        suggestedNights: 1,
+      }
+    );
+  }, [tripId, tours, type, location.state]);
 
   const [travellers, setTravellers] = useState([
     { name: "", age: "", type: "Adult" },
@@ -38,55 +64,64 @@ const CheckoutPage = () => {
     setSubmitting(true);
 
     try {
-      // 1. Create booking and get Razorpay order ID
+      // 1. Create booking on server → gets Razorpay order
       const bookingData = {
-        userId: "user-123", // TODO: Get from AuthContext
-        itemType: "HOTEL", // Hardcoded for demo
-        itemId: tripId || "hotel-123",
-        duration: travellersCount || 1, // Using travellersCount as duration for demo
+        userId: String(user?.userId || ""),
+        itemType: type,
+        itemId: type === "PACKAGE" ? rawItemId : (type === "HOTEL" ? hotelId : tripId),
+        duration: (type === "HOTEL" || type === "PACKAGE") ? 1 : travellersCount,
       };
 
-      const response = await axiosInstance.post("/api/booking/create", bookingData);
+      const response = await axiosInstance.post(
+        "/api/booking/create",
+        bookingData
+      );
       const booking = response.data;
 
-      // 2. Open Razorpay Popup
+      // 2. Open Razorpay checkout
       const options = {
         key: "rzp_test_SfQqx5y2AUfBbB",
-        amount: booking.totalPrice * 100, // Amount is in paise
+        amount: booking.totalPrice * 100,
         currency: "INR",
-        name: "Toural Booking",
-        description: "Complete your booking payment",
+        name: "Toural",
+        description: `Booking for ${destination.name}`,
         order_id: booking.razorpayOrderId,
         handler: async (res) => {
           try {
-            // 3. Verify Payment
+            // 3. Verify payment signature
             await axiosInstance.post("/api/payment/verify", {
               razorpay_order_id: res.razorpay_order_id,
               razorpay_payment_id: res.razorpay_payment_id,
               razorpay_signature: res.razorpay_signature,
             });
-            navigate("/payment-status?status=success");
+            // 4. On success → redirect to My Trips
+            navigate("/my-trips");
           } catch (err) {
             console.error("Payment verification failed", err);
-            navigate("/payment-status?status=failure");
+            alert("Payment verification failed. Please contact support.");
           }
         },
         prefill: {
-          name: travellers[0]?.name || "John Doe",
-          email: contact.email || "john@example.com",
-          contact: contact.phone || "9999999999",
+          name:
+            travellers[0]?.name || user?.firstname || "",
+          email: contact.email || user?.email || "",
+          contact: contact.phone || "",
         },
-        theme: { color: "#3399cc" },
+        theme: { color: "#F4A261" },
       };
 
-      const rzp1 = new Razorpay(options);
-      rzp1.on("payment.failed", function (response) {
-        navigate("/payment-status?status=failure");
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", () => {
+        alert("Payment failed. Please try again.");
       });
-      rzp1.open();
+      rzp.open();
     } catch (error) {
       console.error("Booking creation failed", error);
-      alert(error.response?.data?.message || error.message || "Failed to create booking.");
+      alert(
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to create booking."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -99,11 +134,11 @@ const CheckoutPage = () => {
           Secure checkout
         </p>
         <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-50 md:text-2xl">
-          Confirm your trip details & payment
+          Review your booking & pay
         </h1>
         <p className="max-w-2xl text-sm text-slate-600 dark:text-slate-300">
           Review the travellers, your contact info and payment method before you
-          complete this sample booking.
+          complete your booking.
         </p>
       </header>
 
@@ -134,7 +169,7 @@ const CheckoutPage = () => {
               disabled={!termsAccepted || submitting}
               onClick={handleConfirmPayment}
             >
-              {submitting ? "Processing..." : "Confirm & pay"}
+              {submitting ? "Processing..." : "Confirm & Pay"}
             </Button>
           </>
         }

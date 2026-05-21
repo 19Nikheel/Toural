@@ -49,18 +49,23 @@ const AuthProvider = ({ children }) => {
   };
 
   const login = async (form) => {
-    const response = await axiosInstance.post("/auth/login", {
-      username: form.email,
-      password: form.password,
-      role: "USER",
-    });
-    if (response.status === 200) {
-      const token = response.data;
-      if (token) {
-        localStorage.setItem("jwtToken", token);
-        setJwtToken(token);
+    try {
+      const response = await axiosInstance.post("/auth/login", {
+        username: form.email,
+        password: form.password,
+        role: "USER",
+      });
+      if (response.status === 200) {
+        const token = response.data;
+        if (token) {
+          localStorage.setItem("jwtToken", token);
+          setJwtToken(token);
+        }
+        return response;
       }
-      return response;
+    } catch (error) {
+      console.error("Login failed:", error);
+      return { status: error.response?.status || 500 };
     }
   };
 

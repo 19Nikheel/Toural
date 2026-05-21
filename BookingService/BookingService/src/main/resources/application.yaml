@@ -4,7 +4,7 @@ spring:
   datasource:
     name: booking_service
     username: postgres
-    password: password
+    password: Nik@9905366469
     url: jdbc:postgresql://localhost:5432/booking_service
     driver-class-name: org.postgresql.Driver
 
@@ -23,7 +23,7 @@ razorpay:
 
 
 eureka:
-  instance
+  instance:
     prefer-ip-address: true
   client:
     fetch-registry: true

@@ -44,6 +44,7 @@ public class Hotel {
     @Indexed
     private String cityCode;
     private List<String> images = new ArrayList<>();
+    private Double price;
 
     public ObjectId getId() {
         return id;
@@ -177,4 +178,12 @@ public class Hotel {
     }
 
     private List<String> policies = new ArrayList<>();
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

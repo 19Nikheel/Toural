@@ -24,6 +24,10 @@ public class TouristGuide {
     @EmbeddedId
     private UserProfileId id;
 
+    public TouristGuide(UserProfileId id) {
+        this.id = id;
+    }
+
     @Column(name = "bio", columnDefinition = "text",nullable = false)
     private String bio;
 

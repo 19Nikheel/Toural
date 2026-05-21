@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class AuthUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long userId;
 
     @Column(unique = true ,nullable = false)

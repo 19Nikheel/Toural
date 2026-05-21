@@ -73,7 +73,7 @@ public class UserController {
         String type=byId.get().getType();
         // testing user fetched
         BaseUser user = byId.get();
-        if(type.toLowerCase().equals("user")){
+        if(type.equalsIgnoreCase("user") || type.equalsIgnoreCase("customer")){
             try{
                 UserProfile userProfile = userProfileRepository.findById(new UserProfileId(EmailBucket
                         .bucketFor(byId.get().getEmail(), 16), byId.get().getUserId())).get();
@@ -255,6 +255,8 @@ public class UserController {
 
         if (tg.getLocation() == null) tg.setLocation("NA");
         if (tg.getAvailabilityJson() == null) tg.setAvailabilityJson("[]");
+        if (tg.getBio() == null) tg.setBio("NA");
+        if (tg.getHourlyRate() == null) tg.setHourlyRate(java.math.BigDecimal.ZERO);
 
         if (payload.containsKey("location")) {
             tg.setLocation(payload.get("location"));
@@ -270,5 +272,37 @@ public class UserController {
         }
         touristGuideRepository.save(tg);
         return ResponseEntity.ok("Tourist Guide profile updated successfully");
+    }
+
+    @PutMapping("/driver/update")
+    public ResponseEntity<?> updateDriver(@RequestBody java.util.Map<String, String> payload) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Optional<BaseUser> byId = baseUserService.findById(Long.parseLong(username));
+        if (byId.isEmpty() || !byId.get().getType().equalsIgnoreCase("driver")) {
+            return ResponseEntity.status(HttpStatus.SC_FORBIDDEN).body("Not a driver");
+        }
+        BaseUser user = byId.get();
+        UserProfileId upId = new UserProfileId(EmailBucket.bucketFor(user.getEmail(), 16), user.getUserId());
+        Driver driver = driverRepository.findById(upId).orElseGet(() -> {
+            Driver d = new Driver();
+            d.setId(upId);
+            return d;
+        });
+
+        if (driver.getLicenseNumber() == null) driver.setLicenseNumber("NA");
+        if (driver.getVehicleType() == null) driver.setVehicleType("NA");
+        if (driver.getVehicleModel() == null) driver.setVehicleModel("NA");
+        if (driver.getVehicleNumber() == null) driver.setVehicleNumber("NA");
+        if (driver.getExperienceYears() == null) driver.setExperienceYears(0);
+
+        if (payload.containsKey("licenseNumber")) driver.setLicenseNumber(payload.get("licenseNumber"));
+        if (payload.containsKey("vehicleType")) driver.setVehicleType(payload.get("vehicleType"));
+        if (payload.containsKey("vehicleModel")) driver.setVehicleModel(payload.get("vehicleModel"));
+        if (payload.containsKey("vehicleNumber")) driver.setVehicleNumber(payload.get("vehicleNumber"));
+        if (payload.containsKey("experienceYears")) driver.setExperienceYears(Integer.parseInt(payload.get("experienceYears")));
+
+        driverRepository.save(driver);
+        return ResponseEntity.ok("Driver profile updated successfully");
     }
 }

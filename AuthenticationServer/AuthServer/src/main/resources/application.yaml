@@ -4,7 +4,7 @@ spring:
   datasource:
     name: AuthenticationServer
     username: postgres
-    password: password
+    password: Nik@9905366469
     url: jdbc:postgresql://localhost:5432/AuthenticationServer
     driver-class-name: org.postgresql.Driver
 

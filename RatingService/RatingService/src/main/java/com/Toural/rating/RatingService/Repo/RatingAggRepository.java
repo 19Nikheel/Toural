@@ -2,8 +2,10 @@ package com.Toural.rating.RatingService.Repo;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
+import com.Toural.rating.RatingService.Models.UserTargetReview;
+import com.Toural.rating.RatingService.Models.UserTargetReviewId;
 
-public interface RatingAggRepository extends JpaRepository<Object, Long> {
+public interface RatingAggRepository extends JpaRepository<UserTargetReview, UserTargetReviewId> {
 
     @Modifying
     @Query(value = """

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity(name = "payment_details_table")
 public class PaymentDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String paymentId;
     @Column(nullable = false)
     private String userId;

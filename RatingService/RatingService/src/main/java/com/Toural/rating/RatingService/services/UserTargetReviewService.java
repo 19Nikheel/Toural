@@ -25,17 +25,22 @@ public class UserTargetReviewService {
 
     @Transactional
     public UserTargetReview saveReview(ReviewDTO dto) {
-        UserTargetReview review = new UserTargetReview();
-
         UserTargetReviewId userTargetReviewId = new UserTargetReviewId();
         userTargetReviewId.setTargetId(dto.getTargetId());
         userTargetReviewId.setUserId(dto.getUserId());
         userTargetReviewId.setTargetType(dto.getTargetType());
 
+        UserTargetReview review = repo.findById(userTargetReviewId).orElse(new UserTargetReview());
+
         review.setId(userTargetReviewId);
         review.setRating(dto.getRating());
         review.setComment(dto.getComment());
-        review.setCreatedAt(OffsetDateTime.now());
+        
+        if (review.getCreatedAt() == null) {
+            review.setCreatedAt(OffsetDateTime.now());
+        } else {
+            review.setUpdatedAt(OffsetDateTime.now());
+        }
 
         UserTargetReview saved = repo.save(review);
 
@@ -46,12 +51,12 @@ public class UserTargetReviewService {
 
 
     public List<UserTargetReview> getReviews(String type, Long targetId) {
-        return repo.findByTargetTypeAndTargetId(type, targetId);
+        return repo.findByIdTargetTypeAndIdTargetId(type, targetId);
     }
 
 
     public List<UserTargetReview> getUserReviews(Long userId) {
-        return repo.findByUserId(userId);
+        return repo.findByIdUserId(userId);
     }
 
     // 🔷 DELETE
@@ -70,7 +75,7 @@ public class UserTargetReviewService {
     private void updateAggregate(String type, Long targetId) {
 
         List<UserTargetReview> reviews =
-                repo.findByTargetTypeAndTargetId(type, targetId);
+                repo.findByIdTargetTypeAndIdTargetId(type, targetId);
 
         double avg = reviews.stream()
                 .mapToInt(UserTargetReview::getRating)

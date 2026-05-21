@@ -24,6 +24,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return (((exchange, chain) -> {
+            if (routeValidator.isInternal.test(exchange.getRequest())) {
+                throw new RuntimeException("Access Denied: Internal API");
+            }
             if (routeValidator.isSecure.test(exchange.getRequest())) {
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                     throw new RuntimeException("Authorization Required");

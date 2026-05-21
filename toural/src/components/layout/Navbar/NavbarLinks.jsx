@@ -6,6 +6,9 @@ export default function NavbarLinks() {
     { label: "Home", to: "/" },
     { label: "Destination", to: "/destination" },
     { label: "Hotel", to: "/hotels" },
+    { label: "Guides", to: "/guides" },
+    { label: "Cars", to: "/cars" },
+    { label: "Packages", to: "/packages" },
     { label: "My Trip", to: "/my-trips" },
   ];
 

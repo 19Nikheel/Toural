@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface UserTargetReviewRepository extends JpaRepository<UserTargetReview, UserTargetReviewId> {
-    List<UserTargetReview> findByUserId(Long userId);
-    List<UserTargetReview> findByTargetTypeAndTargetId(String type, Long targetId);
+    List<UserTargetReview> findByIdUserId(Long userId);
+    List<UserTargetReview> findByIdTargetTypeAndIdTargetId(String targetType, Long targetId);
 }

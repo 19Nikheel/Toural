@@ -79,4 +79,51 @@ public class HotelController {
         Hotel hotel = hotelRepo.findByHotelId(hotelId).get();
         return ResponseEntity.ok(hotel);
     }
+
+    @Autowired
+    private org.springframework.data.mongodb.core.MongoTemplate mongoTemplate;
+
+    @GetMapping("/filter")
+    public ResponseEntity<java.util.Map<String, Object>> filterHotels(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Double rating,
+            @RequestParam(required = false) String hasPool,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "6") int limit
+    ) {
+        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        
+        if (city != null && !city.trim().isEmpty()) {
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("cityName").regex(city.trim(), "i"));
+        }
+        
+        if (search != null && !search.trim().isEmpty()) {
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("hotelName").regex(search.trim(), "i"));
+        }
+        
+        if (rating != null && rating > 0) {
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("rating").gte(rating));
+        }
+        
+        if (hasPool != null && !hasPool.equalsIgnoreCase("any")) {
+            boolean poolVal = hasPool.equalsIgnoreCase("yes");
+            query.addCriteria(org.springframework.data.mongodb.core.query.Criteria.where("hasPool").is(poolVal));
+        }
+        
+        long total = mongoTemplate.count(query, Hotel.class);
+        int totalPages = (int) Math.ceil((double) total / limit);
+        
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page - 1, limit);
+        query.with(pageable);
+        
+        List<Hotel> data = mongoTemplate.find(query, Hotel.class);
+        
+        java.util.Map<String, Object> response = new java.util.HashMap<>();
+        response.put("data", data);
+        response.put("totalPages", totalPages == 0 ? 1 : totalPages);
+        response.put("currentPage", page);
+        
+        return ResponseEntity.ok(response);
+    }
 }

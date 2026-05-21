@@ -4,6 +4,7 @@ import com.toural.BookingService.dtos.BookingRequest;
 import com.toural.BookingService.entities.Booking;
 import com.toural.BookingService.entities.BookingStatus;
 import com.toural.BookingService.entities.Inventory;
+import com.toural.BookingService.entities.ItemType;
 import com.toural.BookingService.entities.PaymentLog;
 import com.toural.BookingService.repos.BookingRepository;
 import com.toural.BookingService.repos.InventoryRepository;
@@ -34,20 +35,44 @@ public class BookingService {
 
     @Transactional
     public Booking createBooking(BookingRequest request) {
-        // 1. Verify inventory
-        Inventory inventory = inventoryRepository.findByItemTypeAndItemId(request.getItemType(), request.getItemId())
-                .orElseThrow(() -> new RuntimeException("Inventory not found for " + request.getItemType() + " with id " + request.getItemId()));
+        double totalPrice = 0;
 
-        if (!inventory.isAvailable()) {
-            throw new RuntimeException("The " + request.getItemType() + " is currently closed and unavailable for booking.");
+        if (ItemType.PACKAGE.equals(request.getItemType())) {
+            // Package payload: HOTEL:h1,GUIDE:g1,CAR:c1
+            String[] items = request.getItemId().split(",");
+            for (String itemStr : items) {
+                String[] parts = itemStr.split(":");
+                if (parts.length != 2) continue;
+                String typeStr = parts[0];
+                String id = parts[1];
+                
+                ItemType type = ItemType.valueOf(typeStr);
+                
+                Inventory inventory = inventoryRepository.findByItemTypeAndItemId(type, id)
+                        .orElseThrow(() -> new RuntimeException("Inventory not found for " + type + " with id " + id));
+
+                if (!inventory.isAvailable() || inventory.getAvailableCount() < 1) {
+                    throw new RuntimeException("The " + type + " is currently unavailable for booking.");
+                }
+                
+                totalPrice += inventory.getPrice() * request.getDuration();
+            }
+        } else {
+            // 1. Verify inventory
+            Inventory inventory = inventoryRepository.findByItemTypeAndItemId(request.getItemType(), request.getItemId())
+                    .orElseThrow(() -> new RuntimeException("Inventory not found for " + request.getItemType() + " with id " + request.getItemId()));
+
+            if (!inventory.isAvailable()) {
+                throw new RuntimeException("The " + request.getItemType() + " is currently closed and unavailable for booking.");
+            }
+
+            if (inventory.getAvailableCount() < 1) {
+                throw new RuntimeException("No available items for " + request.getItemType());
+            }
+
+            // 2. Calculate price
+            totalPrice = inventory.getPrice() * request.getDuration();
         }
-
-        if (inventory.getAvailableCount() < 1) {
-            throw new RuntimeException("No available items for " + request.getItemType());
-        }
-
-        // 2. Calculate price
-        double totalPrice = inventory.getPrice() * request.getDuration();
 
         // 3. Save pending booking
         Booking booking = new Booking();
@@ -82,10 +107,27 @@ public class BookingService {
         booking.setRazorpayPaymentId(razorpayPaymentId);
         booking = bookingRepository.save(booking);
 
-        Inventory inventory = inventoryRepository.findByItemTypeAndItemId(booking.getItemType(), booking.getItemId())
-                .orElseThrow(() -> new RuntimeException("Inventory not found"));
-        inventory.setAvailableCount(inventory.getAvailableCount() - 1);
-        inventoryRepository.save(inventory);
+        if (ItemType.PACKAGE.equals(booking.getItemType())) {
+            String[] items = booking.getItemId().split(",");
+            for (String itemStr : items) {
+                String[] parts = itemStr.split(":");
+                if (parts.length != 2) continue;
+                String typeStr = parts[0];
+                String id = parts[1];
+                
+                ItemType type = ItemType.valueOf(typeStr);
+                
+                Inventory inventory = inventoryRepository.findByItemTypeAndItemId(type, id)
+                        .orElseThrow(() -> new RuntimeException("Inventory not found"));
+                inventory.setAvailableCount(inventory.getAvailableCount() - 1);
+                inventoryRepository.save(inventory);
+            }
+        } else {
+            Inventory inventory = inventoryRepository.findByItemTypeAndItemId(booking.getItemType(), booking.getItemId())
+                    .orElseThrow(() -> new RuntimeException("Inventory not found"));
+            inventory.setAvailableCount(inventory.getAvailableCount() - 1);
+            inventoryRepository.save(inventory);
+        }
 
         PaymentLog log = new PaymentLog();
         log.setBookingId(booking.getBookingId());

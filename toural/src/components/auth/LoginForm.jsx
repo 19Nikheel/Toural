@@ -34,12 +34,12 @@ export default function LoginForm() {
     e.preventDefault();
     if (!validate()) return;
     const success = await login(form);
-    if (success.status == 200) {
+    if (success && success.status === 200) {
+      console.log("Logging in successfully with:", form.email);
       navigate("/");
     } else {
       alert("Invalid credentials, please try again.");
     }
-    console.log("Logging in successfully with:", form.email);
   }
 
   return (
