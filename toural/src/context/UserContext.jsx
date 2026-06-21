@@ -1,0 +1,127 @@
+import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import axiosInstance from "./axiosInstance";
+
+const UserContext = createContext({
+  user: {},
+  getUser: async () => {},
+  updateUser: async () => {},
+  deleteUser: async () => {},
+  validateUser: async () => {},
+  updateUsernamePassword: async () => {},
+});
+
+const UserProvider = ({ children }) => {
+  const { getToken, userAuthenticated } = useAuth();
+  const [user, setUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    id: "",
+  });
+
+  const getUser = async () => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+      const response = await axiosInstance.get("/user/profile");
+      if (response.status === 202) {
+        setUser(response.data);
+        return response;
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (userAuthenticated) {
+      getUser();
+    }
+  }, [userAuthenticated]);
+
+  const updateUser = async (firstname, lastname) => {
+    const token = getToken();
+    try {
+      const response = await axiosInstance.put("/user", {
+        firstname,
+        lastname,
+      });
+      if (response.status === 200) {
+        setUser(response.data);
+        localStorage.removeItem("jwtToken");
+        return response;
+      }
+    } catch (error) {
+      console.error("Update failed:", error.response?.data || error.message);
+      return { status: error.response?.status || 500, error: true };
+    }
+  };
+
+  const updateUsernamePassword = async (username, password) => {
+    const token = getToken();
+    try {
+      const response = await axiosInstance.put("/user", {
+        username,
+        password,
+      });
+      if (response.status === 200) {
+        setUser(response.data);
+        return response;
+      }
+    } catch (error) {
+      console.error("Update failed:", error.response?.data || error.message);
+      return { status: error.response?.status || 500, error: true };
+    }
+  };
+
+  const deleteUser = async () => {
+    const token = getToken();
+    try {
+      const response = await axiosInstance.delete("/user");
+      if (response.status === 200) {
+        setUser(null);
+      }
+      return response;
+    } catch (error) {
+      console.error("Deletion failed:", error.response?.data || error.message);
+      return { status: error.response?.status || 500, error: true };
+    }
+  };
+
+  const validateUser = async (username) => {
+    try {
+      const response = await axiosInstance.get("/auth/check-username", {
+        params: { username },
+      });
+      return response;
+    } catch (error) {
+      console.error(
+        "Validation failed:",
+        error.response?.data || error.message,
+      );
+      return {
+        status: error.response?.status || 500,
+        data: { exists: false },
+      };
+    }
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        user,
+        isLoggedIn: userAuthenticated,
+        getUser,
+        updateUser,
+        deleteUser,
+        validateUser,
+        updateUsernamePassword,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
+export default UserProvider;
+export const useUser = () => useContext(UserContext);
