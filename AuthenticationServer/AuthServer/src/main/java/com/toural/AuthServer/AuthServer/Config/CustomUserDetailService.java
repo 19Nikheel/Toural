@@ -17,7 +17,7 @@ import java.util.Optional;
 @Component
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired @Lazy
-    private PasswordEncoder pse;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AuthUserRepo authUserRepo;
